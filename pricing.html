@@ -427,12 +427,13 @@
               </h1>
               <p>
                 We believe in transparency as the foundation of trust with our
-                clients.
+                clients. Our new pricing calculator allows you to customize your project and see the costs in real-time.
               </p>
             </div>
-            <a href="#" class="theme-btn" onclick="openPricingCalculator(event)"
-              >Get a tailored plan that matches your budget</a
-            >
+            <a href="#" class="theme-btn" onclick="openPricingCalculator(event)">
+              Create Your Own Pricing
+              <i class="las la-arrow-right"></i>
+            </a>
           </div>
 
           <div class="pricing-table-lists">
@@ -450,7 +451,7 @@
                     "
                     >from</span
                   >
-                  <sup>R 1199</sup>
+                  <sup>R 1599</sup>
                 </h1>
                 <h5>Entry Level Web</h5>
                 <p>Once Off Payment (excludes domain & hosting)</p>
@@ -477,7 +478,7 @@
                     "
                     >from</span
                   >
-                  <sup>R 1499</sup>
+                  <sup>R 1850</sup>
                 </h1>
                 <h5>Standard Web</h5>
 
@@ -509,7 +510,7 @@
                     "
                     >from</span
                   >
-                  <sup>R 2500</sup>
+                  <sup>R 2999</sup>
                 </h1>
                 <h5>Advanced Web</h5>
                 <p>Once Off or monthly</p>
@@ -1200,7 +1201,7 @@
       <div class="pricing-calculator-content">
         <span class="close-calculator" onclick="closePricingCalculator()">&times;</span>
         <h2>Build Your Custom Plan</h2>
-        <p class="calculator-subtitle">Select the services you need and watch the price update in real-time</p>
+        <p class="calculator-subtitle">Pay less by only selecting the services you need!</p>
         
         <div class="calculator-form">
           <div class="calculator-section">
@@ -1214,24 +1215,24 @@
                 </div>
               </label>
               <label class="calculator-option">
-                <input type="radio" name="website" value="1199" onchange="calculateTotal()">
+                <input type="radio" name="website" value="1599" onchange="calculateTotal()">
                 <div class="option-details">
                   <span class="option-name">Entry Level (1 page)</span>
-                  <span class="option-price">R 1,199</span>
+                  <span class="option-price">R 1,599</span>
                 </div>
               </label>
               <label class="calculator-option">
-                <input type="radio" name="website" value="1499" onchange="calculateTotal()">
+                <input type="radio" name="website" value="1850" onchange="calculateTotal()">
                 <div class="option-details">
                   <span class="option-name">Standard (Multi-page)</span>
-                  <span class="option-price">R 1,499</span>
+                  <span class="option-price">R 1,850</span>
                 </div>
               </label>
               <label class="calculator-option">
-                <input type="radio" name="website" value="2500" onchange="calculateTotal()">
+                <input type="radio" name="website" value="2999" onchange="calculateTotal()">
                 <div class="option-details">
                   <span class="option-name">Advanced (Unlimited)</span>
-                  <span class="option-price">R 2,500</span>
+                  <span class="option-price">R 2,999</span>
                 </div>
               </label>
             </div>
@@ -1697,15 +1698,18 @@
             monthlyTotal: monthlyTotal
           })
         })
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Server error: ' + response.status);
+          }
+          return response.json();
+        })
         .then(data => {
           if (data.success) {
             // Email sent successfully, now open WhatsApp
-            const phoneNumber = '27658335278'; // Remove + and spaces
+            const phoneNumber = '27658335278';
             const encodedMessage = encodeURIComponent(whatsappMessage);
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            
-            // Open WhatsApp in new tab
             window.open(whatsappUrl, '_blank');
             
             // Show success message

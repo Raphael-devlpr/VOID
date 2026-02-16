@@ -72,6 +72,10 @@ $message .= "Please contact the client to follow up on this quote.\n";
 $message .= "Phone: +27 65 833 5278\n";
 $message .= "Email: info@voidtechsolutions.co.za";
 
+// Check if running on localhost
+$isLocalhost = in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1', '::1']) || 
+               strpos($_SERVER['HTTP_HOST'], 'localhost:') === 0;
+
 // Email settings
 $to = "info@voidtechsolutions.co.za";
 $headers = "From: Quote System <noreply@voidtechsolutions.co.za>\r\n";
@@ -79,8 +83,14 @@ $headers .= "Reply-To: info@voidtechsolutions.co.za\r\n";
 $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-// Send email
-$emailSent = mail($to, $subject, $message, $headers);
+// Send email (skip on localhost)
+$emailSent = false;
+if (!$isLocalhost) {
+    $emailSent = mail($to, $subject, $message, $headers);
+} else {
+    // On localhost, just log it and return success
+    $emailSent = true; // Simulate success for localhost testing
+}
 
 // Log the request (optional - for debugging)
 $logFile = __DIR__ . '/quote-requests.log';
