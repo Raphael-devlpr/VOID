@@ -430,7 +430,7 @@
                 clients.
               </p>
             </div>
-            <a href="#" class="theme-btn"
+            <a href="#" class="theme-btn" onclick="openPricingCalculator(event)"
               >Get a tailored plan that matches your budget</a
             >
           </div>
@@ -1174,7 +1174,7 @@
               class="custom-row d-flex align-items-center justify-content-between"
             >
               <p>
-                &copy; 2025 All rights reserved by
+                &copy; 2026 All rights reserved by
                 <a href="">VOID TECH SOLUTIONS</a>
               </p>
             </div>
@@ -1194,5 +1194,547 @@
     <script src="/assets/js/theme-custom.js"></script>
     <script src="/assets/js/form1.js"></script>
     <script src="/assets/js/subscribe-form.js"></script>
+
+    <!-- Pricing Calculator Modal -->
+    <div id="pricingCalculatorModal" class="pricing-calculator-modal">
+      <div class="pricing-calculator-content">
+        <span class="close-calculator" onclick="closePricingCalculator()">&times;</span>
+        <h2>Build Your Custom Plan</h2>
+        <p class="calculator-subtitle">Select the services you need and watch the price update in real-time</p>
+        
+        <div class="calculator-form">
+          <div class="calculator-section">
+            <h3>Website Package</h3>
+            <div class="option-group">
+              <label class="calculator-option">
+                <input type="radio" name="website" value="0" checked onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">No Website</span>
+                  <span class="option-price">R 0</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="radio" name="website" value="1199" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Entry Level (1 page)</span>
+                  <span class="option-price">R 1,199</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="radio" name="website" value="1499" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Standard (Multi-page)</span>
+                  <span class="option-price">R 1,499</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="radio" name="website" value="2500" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Advanced (Unlimited)</span>
+                  <span class="option-price">R 2,500</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="calculator-section">
+            <h3>Add-On Services</h3>
+            <div class="option-group">
+              <label class="calculator-option">
+                <input type="checkbox" value="500" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">SEO Optimization</span>
+                  <span class="option-price">+ R 500</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="checkbox" value="300" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Google Analytics Setup</span>
+                  <span class="option-price">+ R 300</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="checkbox" value="250" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Contact Form Integration</span>
+                  <span class="option-price">+ R 250</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="checkbox" value="400" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Social Media Integration</span>
+                  <span class="option-price">+ R 400</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="checkbox" value="800" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">E-commerce Functionality</span>
+                  <span class="option-price">+ R 800</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="checkbox" value="350" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">SSL Certificate Setup</span>
+                  <span class="option-price">+ R 350</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="calculator-section">
+            <h3>Ongoing Services (Monthly)</h3>
+            <div class="option-group">
+              <label class="calculator-option">
+                <input type="checkbox" value="150" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Web Hosting</span>
+                  <span class="option-price">+ R 150/mo</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="checkbox" value="299" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Monthly Updates (2 per month)</span>
+                  <span class="option-price">+ R 299/mo</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="checkbox" value="499" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Priority Support</span>
+                  <span class="option-price">+ R 499/mo</span>
+                </div>
+              </label>
+              <label class="calculator-option">
+                <input type="checkbox" value="250" onchange="calculateTotal()">
+                <div class="option-details">
+                  <span class="option-name">Website Maintenance</span>
+                  <span class="option-price">+ R 250/mo</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="calculator-total">
+            <div class="total-breakdown">
+              <div class="total-row">
+                <span>One-Time Cost:</span>
+                <span class="total-amount" id="oneTimeTotal">R 0</span>
+              </div>
+              <div class="total-row">
+                <span>Monthly Cost:</span>
+                <span class="total-amount" id="monthlyTotal">R 0/mo</span>
+              </div>
+              <div class="total-row grand-total">
+                <span>Initial Payment:</span>
+                <span class="total-amount" id="grandTotal">R 0</span>
+              </div>
+            </div>
+            <button class="theme-btn calculator-submit" onclick="submitCalculator()">Request Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing Calculator Styles -->
+    <style>
+      .pricing-calculator-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .pricing-calculator-content {
+        background-color: #fff;
+        margin: 2% auto;
+        padding: 40px;
+        border-radius: 20px;
+        max-width: 800px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .close-calculator {
+        color: #aaa;
+        float: right;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 1;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .close-calculator:hover,
+      .close-calculator:focus {
+        color: #667eea;
+      }
+
+      .pricing-calculator-content h2 {
+        color: #222;
+        font-family: 'Yantramanav', sans-serif;
+        font-size: 32px;
+        margin-bottom: 10px;
+        clear: both;
+      }
+
+      .calculator-subtitle {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 16px;
+      }
+
+      .calculator-section {
+        margin-bottom: 30px;
+      }
+
+      .calculator-section h3 {
+        color: #667eea;
+        font-family: 'Syne', sans-serif;
+        font-size: 20px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .option-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .calculator-option {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+      }
+
+      .calculator-option:hover {
+        background: #e8ebff;
+        transform: translateX(5px);
+      }
+
+      .calculator-option input[type="checkbox"]:checked + .option-details,
+      .calculator-option input[type="radio"]:checked + .option-details {
+        font-weight: 600;
+      }
+
+      .calculator-option input[type="checkbox"]:checked ~ *,
+      .calculator-option input[type="radio"]:checked ~ * {
+        color: #667eea;
+      }
+
+      .calculator-option input {
+        margin-right: 15px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        accent-color: #667eea;
+      }
+
+      .option-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+      }
+
+      .option-name {
+        font-size: 16px;
+        color: #222;
+      }
+
+      .option-price {
+        font-size: 16px;
+        font-weight: 600;
+        color: #667eea;
+      }
+
+      .calculator-total {
+        margin-top: 40px;
+        padding: 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        color: white;
+      }
+
+      .total-breakdown {
+        margin-bottom: 25px;
+      }
+
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .total-row.grand-total {
+        font-size: 24px;
+        font-weight: 700;
+        border-bottom: none;
+        padding-top: 20px;
+        margin-top: 10px;
+      }
+
+      .total-amount {
+        font-weight: 600;
+      }
+
+      .calculator-submit {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        background: white;
+        color: #667eea;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .calculator-submit:hover {
+        background: #f0f0f0;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .pricing-calculator-content {
+          padding: 20px;
+          margin: 5% auto;
+          width: 95%;
+        }
+
+        .pricing-calculator-content h2 {
+          font-size: 24px;
+        }
+
+        .calculator-section h3 {
+          font-size: 18px;
+        }
+
+        .option-name,
+        .option-price {
+          font-size: 14px;
+        }
+
+        .total-row {
+          font-size: 14px;
+        }
+
+        .total-row.grand-total {
+          font-size: 20px;
+        }
+      }
+    </style>
+
+    <!-- Pricing Calculator Script -->
+    <script>
+      function openPricingCalculator(event) {
+        event.preventDefault();
+        document.getElementById('pricingCalculatorModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        calculateTotal();
+      }
+
+      function closePricingCalculator() {
+        document.getElementById('pricingCalculatorModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function(event) {
+        const modal = document.getElementById('pricingCalculatorModal');
+        if (event.target === modal) {
+          closePricingCalculator();
+        }
+      }
+
+      function calculateTotal() {
+        let oneTimeTotal = 0;
+        let monthlyTotal = 0;
+
+        // Get website package (radio buttons)
+        const websiteRadios = document.querySelectorAll('input[name="website"]');
+        websiteRadios.forEach(radio => {
+          if (radio.checked) {
+            oneTimeTotal += parseInt(radio.value);
+          }
+        });
+
+        // Get all checkboxes
+        const checkboxes = document.querySelectorAll('.calculator-option input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+          if (checkbox.checked) {
+            const value = parseInt(checkbox.value);
+            const label = checkbox.parentElement.querySelector('.option-name').textContent;
+            
+            // Check if it's a monthly service
+            if (label.includes('Hosting') || label.includes('Monthly') || 
+                label.includes('Support') || label.includes('Maintenance')) {
+              monthlyTotal += value;
+            } else {
+              oneTimeTotal += value;
+            }
+          }
+        });
+
+        // Update display
+        document.getElementById('oneTimeTotal').textContent = 'R ' + oneTimeTotal.toLocaleString();
+        document.getElementById('monthlyTotal').textContent = 'R ' + monthlyTotal.toLocaleString() + '/mo';
+        document.getElementById('grandTotal').textContent = 'R ' + oneTimeTotal.toLocaleString();
+      }
+
+      function submitCalculator() {
+        let oneTimeTotal = 0;
+        let monthlyTotal = 0;
+        let selectedServices = {
+          website: 'None',
+          addons: [],
+          monthly: []
+        };
+
+        // Get website package
+        const websiteRadios = document.querySelectorAll('input[name="website"]');
+        websiteRadios.forEach(radio => {
+          if (radio.checked && parseInt(radio.value) > 0) {
+            const name = radio.parentElement.querySelector('.option-name').textContent;
+            selectedServices.website = name;
+            oneTimeTotal += parseInt(radio.value);
+          }
+        });
+
+        // Get all checkboxes
+        const checkboxes = document.querySelectorAll('.calculator-option input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+          if (checkbox.checked) {
+            const value = parseInt(checkbox.value);
+            const label = checkbox.parentElement.querySelector('.option-name').textContent;
+            
+            if (label.includes('Hosting') || label.includes('Monthly') || 
+                label.includes('Support') || label.includes('Maintenance')) {
+              monthlyTotal += value;
+              selectedServices.monthly.push(label);
+            } else {
+              oneTimeTotal += value;
+              selectedServices.addons.push(label);
+            }
+          }
+        });
+
+        // Create summary message for WhatsApp
+        let whatsappMessage = `*NEW QUOTE REQUEST*\n\n`;
+        whatsappMessage += `*Website Package:* ${selectedServices.website}\n\n`;
+        
+        if (selectedServices.addons.length > 0) {
+          whatsappMessage += `*Add-ons:*\n${selectedServices.addons.map(s => '• ' + s).join('\n')}\n\n`;
+        }
+        
+        if (selectedServices.monthly.length > 0) {
+          whatsappMessage += `*Monthly Services:*\n${selectedServices.monthly.map(s => '• ' + s).join('\n')}\n\n`;
+        }
+        
+        whatsappMessage += `*One-Time Cost:* R ${oneTimeTotal.toLocaleString()}\n`;
+        if (monthlyTotal > 0) {
+          whatsappMessage += `*Monthly Cost:* R ${monthlyTotal.toLocaleString()}/mo\n`;
+        }
+
+        // Disable the button and show loading state
+        const submitBtn = document.querySelector('.calculator-submit');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+
+        // Send email via PHP backend
+        fetch('/send-quote.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            website: selectedServices.website,
+            addons: selectedServices.addons,
+            monthly: selectedServices.monthly,
+            oneTimeTotal: oneTimeTotal,
+            monthlyTotal: monthlyTotal
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Email sent successfully, now open WhatsApp
+            const phoneNumber = '27658335278'; // Remove + and spaces
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            alert('✅ Quote request sent!\n\nWe\'ve received your quote request via email and opened WhatsApp for you to send the details directly.\n\nOur team will respond within 24 hours.\n\nThank you for choosing VOID Tech Solutions!');
+            
+            closePricingCalculator();
+          } else {
+            throw new Error(data.message || 'Failed to send quote');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          
+          // Even if email fails, still open WhatsApp as backup
+          const phoneNumber = '27658335278';
+          const encodedMessage = encodeURIComponent(whatsappMessage);
+          const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+          window.open(whatsappUrl, '_blank');
+          
+          alert('⚠️ We\'ve opened WhatsApp for you to send your quote directly.\n\nAlternatively, you can:\n📞 Call: +27 65 833 5278\n📧 Email: info@voidtechsolutions.co.za\n\nWe apologize for any inconvenience!');
+          
+          closePricingCalculator();
+        })
+        .finally(() => {
+          // Re-enable button
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        });
+      }
+    </script>
   </body>
 </html>
