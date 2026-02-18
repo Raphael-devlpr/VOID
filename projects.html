@@ -67,7 +67,7 @@
             border-radius: 18px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.16);
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(20, 25, 35, 0.95);
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             position: relative;
         }
@@ -452,7 +452,7 @@
                 gallery: ['/assets/imgs/modjiemedihero.png', '/assets/imgs/modjiemedirooms.png', '/assets/imgs/modjiemedibook.png', '/assets/imgs/modjiemediamentities.png'],
                 overlayText: 'Hospitality website concept focused on bookings, trust, and local visibility.',
                 tags: ['Hospitality', 'Booking UX'],
-                link: '#'
+                link: 'https://modjiemediguesthouse.co.za/'
             }
         ];
 
@@ -471,7 +471,6 @@
             const slides = galleryImages.map((imageSrc) => `
                 <div class="swiper-slide project-slide">
                     <img src="${imageSrc}" alt="${project.title}" loading="lazy">
-                    <div class="project-slide-overlay">${overlayText}</div>
                 </div>
             `).join('');
             const slideLabel = galleryImages.length > 1 ? 'Swipe gallery' : 'Project preview';
