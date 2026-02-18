@@ -59,8 +59,8 @@
 
         .projects-page .projects-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
         }
 
         .projects-page .project-card {
@@ -94,7 +94,7 @@
         .projects-page .project-card .img-wrap {
             position: relative;
             overflow: hidden;
-            height: 230px;
+            height: 380px;
         }
 
         .projects-page .project-swiper,
@@ -214,20 +214,14 @@
         }
 
 
-        @media (max-width: 1100px) {
-            .projects-page .projects-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
         @media (max-width: 767px) {
             .projects-page .projects-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
+                gap: 20px;
             }
 
             .projects-page .project-card .img-wrap {
-                height: 210px;
+                height: 280px;
             }
         }
     </style>
@@ -420,119 +414,42 @@
                 title: 'Construction Company Website',
                 category: 'Website Development',
                 location: 'Norkem Park, Gauteng',
-                description: 'Built a modern construction company website from scratch with a mobile-first layout, service-focused structure, and lead-ready contact flow to help the client attract more local projects.',
+                description: 'We built this construction company website from scratch, using modern web tools and a mobile-first approach. Making it easy for the client to highlight their projects, attract new business, and quickly update content with responsive elements and dynamic pages.',
                 image: '/assets/imgs/em.jpg',
                 gallery: ['/assets/imgs/em.jpg', '/assets/imgs/case-studio-7.jpg', '/assets/imgs/case-studio-8.jpg'],
                 overlayText: 'Mobile-first construction brand website focused on local lead generation and service visibility.',
-                tags: ['Responsive', 'Business Site'],
+                tags: ['Responsive Elements', 'Dynamic Pages'],
                 link: '#'
             },
             {
                 title: 'Blue Spoon POS System',
                 category: 'Application Development',
                 location: 'Boksburg, Gauteng',
-                description: 'Developed a complete web-based point-of-sale system that lets teams process payments, monitor inventory in real time, and generate clear sales reports from any connected device.',
+                description: 'We built a modern Point-of-Sale system that helps small businesses and restaurants accept payments, track sales, and manage inventory—all from any device. It\'s simple, secure, and designed to make running your business easier every day.',
                 image: '/assets/imgs/bluespoonpos.jpg',
                 gallery: ['/assets/imgs/bluespoonpos.jpg', '/assets/imgs/bluespoon.jpg', '/assets/imgs/posimage.png'],
-                overlayText: 'Web POS with inventory, real-time reporting, and secure payment workflows.',
-                tags: ['POS', 'Web App'],
+                overlayText: 'Modern POS system for small businesses with payment processing, sales tracking, and inventory management.',
+                tags: ['Task Management', 'Smart Reminders'],
                 link: 'https://bluespoonpos.vercel.app/login'
             },
             {
-                title: 'Plaudits SA Online Store',
-                category: 'E-Commerce',
+                title: 'Plaudits SA Online Clothing Store',
+                category: 'E-Commerce (Online Store)',
                 location: 'Pretoria, Gauteng',
-                description: 'Launched a fashion e-commerce store for Plaudits SA with intuitive product discovery, secure checkout, and a responsive shopping experience that performs well on mobile.',
+                description: 'We developed a seamless online shopping experience for Plaudits SA, allowing customers to easily explore and purchase the latest fashion trends. The platform offers an intuitive shopping cart, secure payment process, and a fully responsive design—empowering Plaudits SA to expand their reach and strengthen their brand online.',
                 image: '/assets/imgs/plaudits.jpg',
                 gallery: ['/assets/imgs/plaudits.jpg', '/assets/imgs/plauditsgirl.jpg', '/assets/imgs/plauditshoodies.jpg'],
-                overlayText: 'Fashion storefront optimized for seamless browsing and high-conversion checkout.',
-                tags: ['Storefront', 'Checkout'],
+                overlayText: 'Seamless fashion e-commerce with easy shopping cart, secure payments, and mobile-optimized storefront.',
+                tags: ['Secure Payments', 'Mobile-Optimized'],
                 link: 'https://plauditssa.co.za/'
-            },
-            {
-                title: 'Fashion Product Experience',
-                category: 'E-Commerce',
-                location: 'Pretoria, Gauteng',
-                description: 'Designed high-impact product presentation sections and merchandising layouts to improve product visibility, increase customer engagement, and support stronger conversion performance.',
-                image: '/assets/imgs/plauditsgirl.jpg',
-                gallery: ['/assets/imgs/plauditsgirl.jpg', '/assets/imgs/plaudits.jpg', '/assets/imgs/plauditshoodies.jpg'],
-                overlayText: 'Product experience design focused on engagement, storytelling, and retention.',
-                tags: ['Branding', 'UX'],
-                link: 'https://plauditssa.co.za/'
-            },
-            {
-                title: 'Integrated Product Catalog',
-                category: 'E-Commerce',
-                location: 'South Africa',
-                description: 'Implemented a clean catalog structure with organized categories and optimized shopping flow to help customers find products faster and complete purchases with fewer steps.',
-                image: '/assets/imgs/plauditshoodies.jpg',
-                gallery: ['/assets/imgs/plauditshoodies.jpg', '/assets/imgs/plaudits.jpg', '/assets/imgs/plauditsgirl.jpg'],
-                overlayText: 'Structured catalog architecture that improves product discovery and purchase speed.',
-                tags: ['Catalog', 'SEO'],
-                link: 'https://plauditssa.co.za/'
-            },
-            {
-                title: 'Business App Deployment',
-                category: 'Application Development',
-                location: 'Gauteng',
-                description: 'Delivered a deployment-ready application architecture focused on maintainability, fast user experience, and long-term scalability for growing business requirements.',
-                image: '/assets/imgs/appdev.jpg',
-                gallery: ['/assets/imgs/appdev.jpg', '/assets/imgs/hero-service-about.jpg', '/assets/imgs/feature-img-1.png'],
-                overlayText: 'Production-ready application stack built for speed, stability, and scale.',
-                tags: ['Scalable', 'Deployment'],
-                link: 'pricing.html#pricing-app'
-            },
-            {
-                title: 'Secure API Integration Layer',
-                category: 'API Integration',
-                location: 'South Africa',
-                description: 'Built secure API integration pipelines to connect platforms and internal systems, enabling reliable data flow, automation, and improved operational efficiency.',
-                image: '/assets/imgs/api.jpg',
-                gallery: ['/assets/imgs/api.jpg', '/assets/imgs/case-studio-5.jpg', '/assets/imgs/case-studio-6.jpg'],
-                overlayText: 'Reliable API orchestration layer for secure system-to-system communication.',
-                tags: ['Automation', 'Integration'],
-                link: 'pricing.html#pricing-api'
-            },
-            {
-                title: 'Data Analytics Dashboard',
-                category: 'Data & AI',
-                location: 'South Africa',
-                description: 'Created a data analytics dashboard with insight-driven reporting to help teams monitor key metrics and make faster, evidence-based operational decisions.',
-                image: '/assets/imgs/analytics.jpg',
-                gallery: ['/assets/imgs/analytics.jpg', '/assets/imgs/case-studio-2.jpg', '/assets/imgs/case-studio-2-2.jpg'],
-                overlayText: 'Analytics dashboard designed for faster metric visibility and decision-making.',
-                tags: ['Insights', 'Analytics'],
-                link: 'pricing.html#pricing-api'
-            },
-            {
-                title: 'POS Mobile Companion',
-                category: 'Application Development',
-                location: 'Gauteng',
-                description: 'Developed a mobile companion interface for POS operations, giving retail and restaurant teams simplified workflows for daily transactions and stock management.',
-                image: '/assets/imgs/posimage.png',
-                gallery: ['/assets/imgs/posimage.png', '/assets/imgs/bluespoonpos.jpg', '/assets/imgs/bluespoon.jpg'],
-                overlayText: 'Mobile companion workflows built for fast, daily point-of-sale operations.',
-                tags: ['Mobile UX', 'Operations'],
-                link: '#features'
-            },
-            {
-                title: 'Next-Gen Commerce Experience',
-                category: 'Website Development',
-                location: 'South Africa',
-                description: 'Crafted a modern, futuristic commerce experience with visual storytelling and performance-focused front-end design tailored for digital-first brands.',
-                image: '/assets/imgs/bluespoon.jpg',
-                gallery: ['/assets/imgs/bluespoon.jpg', '/assets/imgs/case-studio-9.jpg', '/assets/imgs/feature-img-2.png'],
-                overlayText: 'Futuristic front-end direction for bold digital-first brand experiences.',
-                tags: ['Modern UI', 'Performance'],
-                link: '#'
             },
             {
                 title: 'Modjiededi Guest House Website',
                 category: 'Website Development',
                 location: 'South Africa',
-                description: 'Example project: designed and launched a welcoming guest house website with room highlights, booking-focused calls to action, and a mobile-friendly layout for travelers.',
-                image: '/assets/imgs/hero-service-about.jpg',
-                gallery: ['/assets/imgs/hero-service-about.jpg', '/assets/imgs/case-studio-7.jpg', '/assets/imgs/case-studio-8.jpg'],
+                description: 'Designed and launched a welcoming guest house website with room highlights, booking-focused calls to action, and a mobile-friendly layout for travelers.',
+                image: '/assets/imgs/modjiemedihero.png',
+                gallery: ['/assets/imgs/modjiemedihero.png', '/assets/imgs/modjiemedirooms.png', '/assets/imgs/modjiemedibook.png', '/assets/imgs/modjiemediamentities.png'],
                 overlayText: 'Hospitality website concept focused on bookings, trust, and local visibility.',
                 tags: ['Hospitality', 'Booking UX'],
                 link: '#'
@@ -570,6 +487,7 @@
                         <span class="project-slide-label">${slideLabel}</span>
                     </div>
                     <div class="content">
+                        <h5 class="section-subtitle" style="margin-bottom: 12px; color: #9edfff; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">${project.category}</h5>
                         <div class="project-badges">${tags}</div>
                         <h3>${project.title}</h3>
                         <span class="project-meta"><i class="las la-map-marker-alt"></i> ${project.location}</span>
