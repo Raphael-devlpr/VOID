@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="u_H5Q3VyES57IKKYBleBk6l5Wa49heO6sVpxBnT_kpc" />
+
+    <title>VOID Tech Solutions | Projects Showcase</title>
+    <meta name="description" content="Explore VOID Tech Solutions projects across web development, apps, e-commerce, API integrations, and digital products in South Africa." />
+    <meta name="keywords" content="VOID projects, web development portfolio, app portfolio, e-commerce projects, API projects, Gauteng IT projects" />
+    <meta name="author" content="VOID Tech Solutions" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://voidtechsolutions.co.za/projects.html" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://voidtechsolutions.co.za/projects.html" />
+    <meta property="og:title" content="VOID Tech Solutions | Projects Showcase" />
+    <meta property="og:description" content="A modern showcase of our latest web, app, e-commerce and integration projects." />
+    <meta property="og:image" content="https://voidtechsolutions.co.za/assets/imgs/void-featured.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="VOID Tech Solutions | Projects Showcase" />
+    <meta name="twitter:description" content="Explore all our featured digital projects and product builds." />
+    <meta name="twitter:image" content="https://voidtechsolutions.co.za/assets/imgs/void-featured.png" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/imgs/logo1.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/imgs/logo1.png" />
+    <link rel="shortcut icon" href="/assets/imgs/logo1.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,100;1,9..40,200;1,9..40,300;1,9..40,400;1,9..40,500;1,9..40,600&family=Syne:wght@400;500;600;700&family=Yantramanav:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <style>
+        .projects-page .hero-section-content-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects-page .hero-section-content-wrap::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(128, 105, 255, 0.14), transparent 45%),
+                        radial-gradient(circle at 85% 15%, rgba(0, 189, 255, 0.12), transparent 40%),
+                        radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.07), transparent 40%);
+            pointer-events: none;
+        }
+
+
+        .projects-page .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .projects-page .project-card {
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+
+        .projects-page .project-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            border: 1px solid rgba(113, 202, 255, 0);
+            pointer-events: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .projects-page .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .projects-page .project-card:hover::after {
+            border-color: rgba(113, 202, 255, 0.55);
+        }
+
+        .projects-page .project-card .img-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 230px;
+        }
+
+        .projects-page .project-swiper,
+        .projects-page .project-slide {
+            width: 100%;
+            height: 100%;
+        }
+
+        .projects-page .project-card .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.55s ease;
+        }
+
+        .projects-page .project-slide {
+            position: relative;
+        }
+
+        .projects-page .project-slide-overlay {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: linear-gradient(180deg, rgba(8, 10, 18, 0.2) 0%, rgba(8, 10, 18, 0.92) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 8px 10px;
+            color: #fff;
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .projects-page .project-slide-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: rgba(8, 10, 18, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 11px;
+            letter-spacing: 0.3px;
+        }
+
+        .projects-page .project-swiper .swiper-pagination-bullet {
+            background: rgba(255, 255, 255, 0.55);
+            opacity: 1;
+        }
+
+        .projects-page .project-swiper .swiper-pagination-bullet-active {
+            background: #9edfff;
+        }
+
+        .projects-page .project-card:hover .img-wrap img {
+            transform: scale(1.06);
+        }
+
+        .projects-page .project-card .content {
+            padding: 20px;
+        }
+
+        .projects-page .project-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 11px;
+        }
+
+        .projects-page .project-badge {
+            font-size: 12px;
+            letter-spacing: 0.4px;
+            border-radius: 999px;
+            padding: 6px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .projects-page .project-card h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .projects-page .project-meta {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .projects-page .project-desc {
+            color: rgba(255, 255, 255, 0.88);
+            margin-bottom: 16px;
+            line-height: 1.65;
+            font-size: 15px;
+        }
+
+        .projects-page .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #9edfff;
+            font-weight: 600;
+            transition: gap 0.25s ease;
+        }
+
+        .projects-page .project-link:hover {
+            gap: 10px;
+            color: #9edfff;
+        }
+
+
+        @media (max-width: 1100px) {
+            .projects-page .projects-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767px) {
+            .projects-page .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .projects-page .project-card .img-wrap {
+                height: 210px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="main-page projects-page">
+        <header class="header-area">
+            <div class="custom-container">
+                <div class="custom-row align-items-center justify-content-between">
+                    <div class="header-left d-flex align-items-center">
+                        <a class='logo' href='/' style='display: flex; flex-direction: column; align-items: center;'>
+                            <img src="/assets/imgs/logo1.png" alt="Logo" style="max-height: 50px; width: auto;" />
+                            <span style="font-family: 'Syne', 'DM Sans', Arial, sans-serif; font-weight: 700; font-size: 1.2rem; color: #222; letter-spacing: 2px; margin-top: 4px;">VOID</span>
+                        </a>
+                        <div class="header-left-right">
+                            <a href="index.html#contact-section" class="theme-btn">Contact Us</a>
+                            <span class="menu-bar">
+                                <i class="las la-bars"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <nav class="navbar-wrapper">
+                        <span class="close-menu-bar">
+                            <i class="las la-times"></i>
+                        </span>
+                        <ul>
+                            <li class="dropdown-menu-item">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="dropdown-menu-item">
+                                <a href="pricing.html">Pricing</a>
+                            </li>
+                            <li class="dropdown-menu-item">
+                                <a href="service.html">Services</a>
+                            </li>
+                            <li class="dropdown-menu-item">
+                                <a href="projects.html">Projects</a>
+                            </li>
+                            <li>
+                                <a href="#">FAQ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="header-right">
+                        <div class="header-contact-info d-flex align-items-center">
+                            <div class="phone-number">
+                                <a href="tel:+27658335278">
+                                    Call Us
+                                    <i class="iconoir-arrow-up-right"></i>
+                                </a>
+                                +27 65 833 5278
+                            </div>
+                            <a href="index.html#contact-section" class="theme-btn">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero-service-wrap hero-section-wrap hero-career-wrap">
+            <div class="hero-section-content-wrap">
+                <img src="/assets/imgs/bg-shape-1.svg" alt="Shape" class="animation-slide-left bg-shape" />
+                <div class="custom-container">
+                    <div class="hero-portfolio-body">
+                        <div class="hero-section-content text-center">
+                            <h5 class="section-subtitle">Showcase of our recognized work</h5>
+                            <h1 class="section-title fade-in">Recent Projects</h1>
+                            <p>Our latest builds and digital solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-area">
+            <div class="custom-container">
+                <div id="projectsGrid" class="projects-grid"></div>
+            </div>
+        </section>
+
+           <footer class="footer-area">
+        <img
+          src="/assets/imgs/bg-shape-4.svg"
+          alt="Shape"
+          class="animation-slide-right bg-shape"
+        />
+        <div class="footer-top">
+          <div class="custom-container">
+            <div class="custom-row align-items-end justify-content-between">
+              <div class="left-content">
+                <a
+                  href="index.html"
+                  class="logo"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    max-width: 80px;
+                  "
+                >
+                  <img
+                    src="/assets/imgs/logo1.png"
+                    alt="Logo"
+                    style="width: 100%; max-width: 80px; height: auto"
+                  />
+                  <span
+                    style="
+                      display: block;
+                      color: #fff;
+                      font-weight: bold;
+                      font-size: 1.2rem;
+                      margin-top: 8px;
+                      letter-spacing: 2px;
+                      font-family: 'Syne', 'DM Sans', Arial, sans-serif;
+                    "
+                    >VOID</span
+                  >
+                </a>
+                <p>
+                  We provide the expertise and support to <br />
+                  propel your business forward.
+                </p>
+
+                <div class="footer-clients d-flex align-items-center">
+                  <div class="footer-client-img">
+                    <img src="/assets/imgs/godaddy.png" alt="Youtube" />
+                  </div>
+                  <div class="footer-client-img">
+                    <img src="/assets/imgs/novascale.png" alt="upwork" />
+                  </div>
+                  <div class="footer-client-img">
+                    <img src="/assets/imgs/webflow.svg" alt="webflow" />
+                  </div>
+                  <div class="footer-client-img">
+                    <img src="/assets/imgs/afrihost.png" alt="shopify" />
+                  </div>
+
+                  <div class="footer-client-img">
+                    <img src="/assets/imgs/shopify.svg" alt="shopify" />
+                  </div>
+                  <div class="footer-client-img">
+                    <img src="/assets/imgs/wordpress.png" alt="shopify" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="right-content">
+                <div class="right-content-inner">
+                  <h2>Ready to Elevate Your Business?</h2>
+                  <p>
+                    Connect with our IT specialists for tailored solutions<br />
+                    that drive growth and innovation for your company.
+                  </p>
+                  <a href="tel:+27658335278" class="theme-btn"> Call Us Now </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="copyright-area">
+          <div class="custom-container">
+            <div
+              class="custom-row d-flex align-items-center justify-content-between"
+            >
+              <p>
+                &copy; 2026 All rights reserved by
+                <a href="">VOID TECH SOLUTIONS</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script src="/assets/js/jquery-3.7.0.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/gsap.min.js"></script>
+    <script src="/assets/js/Draggable.min.js"></script>
+    <script src="/assets/js/swiper-bundle.min.js"></script>
+    <script src="/assets/js/client-marquee.js"></script>
+    <script src="/assets/js/theme-custom.js"></script>
+    <script src="/assets/js/form1.js"></script>
+    <script src="/assets/js/subscribe-form.js"></script>
+
+    <script>
+        const projectsData = [
+            {
+                title: 'Construction Company Website',
+                category: 'Website Development',
+                location: 'Norkem Park, Gauteng',
+                description: 'Built a modern construction company website from scratch with a mobile-first layout, service-focused structure, and lead-ready contact flow to help the client attract more local projects.',
+                image: '/assets/imgs/em.jpg',
+                gallery: ['/assets/imgs/em.jpg', '/assets/imgs/case-studio-7.jpg', '/assets/imgs/case-studio-8.jpg'],
+                overlayText: 'Mobile-first construction brand website focused on local lead generation and service visibility.',
+                tags: ['Responsive', 'Business Site'],
+                link: '#'
+            },
+            {
+                title: 'Blue Spoon POS System',
+                category: 'Application Development',
+                location: 'Boksburg, Gauteng',
+                description: 'Developed a complete web-based point-of-sale system that lets teams process payments, monitor inventory in real time, and generate clear sales reports from any connected device.',
+                image: '/assets/imgs/bluespoonpos.jpg',
+                gallery: ['/assets/imgs/bluespoonpos.jpg', '/assets/imgs/bluespoon.jpg', '/assets/imgs/posimage.png'],
+                overlayText: 'Web POS with inventory, real-time reporting, and secure payment workflows.',
+                tags: ['POS', 'Web App'],
+                link: 'https://bluespoonpos.vercel.app/login'
+            },
+            {
+                title: 'Plaudits SA Online Store',
+                category: 'E-Commerce',
+                location: 'Pretoria, Gauteng',
+                description: 'Launched a fashion e-commerce store for Plaudits SA with intuitive product discovery, secure checkout, and a responsive shopping experience that performs well on mobile.',
+                image: '/assets/imgs/plaudits.jpg',
+                gallery: ['/assets/imgs/plaudits.jpg', '/assets/imgs/plauditsgirl.jpg', '/assets/imgs/plauditshoodies.jpg'],
+                overlayText: 'Fashion storefront optimized for seamless browsing and high-conversion checkout.',
+                tags: ['Storefront', 'Checkout'],
+                link: 'https://plauditssa.co.za/'
+            },
+            {
+                title: 'Fashion Product Experience',
+                category: 'E-Commerce',
+                location: 'Pretoria, Gauteng',
+                description: 'Designed high-impact product presentation sections and merchandising layouts to improve product visibility, increase customer engagement, and support stronger conversion performance.',
+                image: '/assets/imgs/plauditsgirl.jpg',
+                gallery: ['/assets/imgs/plauditsgirl.jpg', '/assets/imgs/plaudits.jpg', '/assets/imgs/plauditshoodies.jpg'],
+                overlayText: 'Product experience design focused on engagement, storytelling, and retention.',
+                tags: ['Branding', 'UX'],
+                link: 'https://plauditssa.co.za/'
+            },
+            {
+                title: 'Integrated Product Catalog',
+                category: 'E-Commerce',
+                location: 'South Africa',
+                description: 'Implemented a clean catalog structure with organized categories and optimized shopping flow to help customers find products faster and complete purchases with fewer steps.',
+                image: '/assets/imgs/plauditshoodies.jpg',
+                gallery: ['/assets/imgs/plauditshoodies.jpg', '/assets/imgs/plaudits.jpg', '/assets/imgs/plauditsgirl.jpg'],
+                overlayText: 'Structured catalog architecture that improves product discovery and purchase speed.',
+                tags: ['Catalog', 'SEO'],
+                link: 'https://plauditssa.co.za/'
+            },
+            {
+                title: 'Business App Deployment',
+                category: 'Application Development',
+                location: 'Gauteng',
+                description: 'Delivered a deployment-ready application architecture focused on maintainability, fast user experience, and long-term scalability for growing business requirements.',
+                image: '/assets/imgs/appdev.jpg',
+                gallery: ['/assets/imgs/appdev.jpg', '/assets/imgs/hero-service-about.jpg', '/assets/imgs/feature-img-1.png'],
+                overlayText: 'Production-ready application stack built for speed, stability, and scale.',
+                tags: ['Scalable', 'Deployment'],
+                link: 'pricing.html#pricing-app'
+            },
+            {
+                title: 'Secure API Integration Layer',
+                category: 'API Integration',
+                location: 'South Africa',
+                description: 'Built secure API integration pipelines to connect platforms and internal systems, enabling reliable data flow, automation, and improved operational efficiency.',
+                image: '/assets/imgs/api.jpg',
+                gallery: ['/assets/imgs/api.jpg', '/assets/imgs/case-studio-5.jpg', '/assets/imgs/case-studio-6.jpg'],
+                overlayText: 'Reliable API orchestration layer for secure system-to-system communication.',
+                tags: ['Automation', 'Integration'],
+                link: 'pricing.html#pricing-api'
+            },
+            {
+                title: 'Data Analytics Dashboard',
+                category: 'Data & AI',
+                location: 'South Africa',
+                description: 'Created a data analytics dashboard with insight-driven reporting to help teams monitor key metrics and make faster, evidence-based operational decisions.',
+                image: '/assets/imgs/analytics.jpg',
+                gallery: ['/assets/imgs/analytics.jpg', '/assets/imgs/case-studio-2.jpg', '/assets/imgs/case-studio-2-2.jpg'],
+                overlayText: 'Analytics dashboard designed for faster metric visibility and decision-making.',
+                tags: ['Insights', 'Analytics'],
+                link: 'pricing.html#pricing-api'
+            },
+            {
+                title: 'POS Mobile Companion',
+                category: 'Application Development',
+                location: 'Gauteng',
+                description: 'Developed a mobile companion interface for POS operations, giving retail and restaurant teams simplified workflows for daily transactions and stock management.',
+                image: '/assets/imgs/posimage.png',
+                gallery: ['/assets/imgs/posimage.png', '/assets/imgs/bluespoonpos.jpg', '/assets/imgs/bluespoon.jpg'],
+                overlayText: 'Mobile companion workflows built for fast, daily point-of-sale operations.',
+                tags: ['Mobile UX', 'Operations'],
+                link: '#features'
+            },
+            {
+                title: 'Next-Gen Commerce Experience',
+                category: 'Website Development',
+                location: 'South Africa',
+                description: 'Crafted a modern, futuristic commerce experience with visual storytelling and performance-focused front-end design tailored for digital-first brands.',
+                image: '/assets/imgs/bluespoon.jpg',
+                gallery: ['/assets/imgs/bluespoon.jpg', '/assets/imgs/case-studio-9.jpg', '/assets/imgs/feature-img-2.png'],
+                overlayText: 'Futuristic front-end direction for bold digital-first brand experiences.',
+                tags: ['Modern UI', 'Performance'],
+                link: '#'
+            },
+            {
+                title: 'Modjiededi Guest House Website',
+                category: 'Website Development',
+                location: 'South Africa',
+                description: 'Example project: designed and launched a welcoming guest house website with room highlights, booking-focused calls to action, and a mobile-friendly layout for travelers.',
+                image: '/assets/imgs/hero-service-about.jpg',
+                gallery: ['/assets/imgs/hero-service-about.jpg', '/assets/imgs/case-studio-7.jpg', '/assets/imgs/case-studio-8.jpg'],
+                overlayText: 'Hospitality website concept focused on bookings, trust, and local visibility.',
+                tags: ['Hospitality', 'Booking UX'],
+                link: '#'
+            }
+        ];
+
+        const projectsGrid = document.getElementById('projectsGrid');
+        function projectTemplate(project) {
+            const tags = project.tags.map(tag => `<span class="project-badge">${tag}</span>`).join('');
+            const description = project.description && project.description.trim().length
+                ? project.description
+                : 'Custom digital solution designed and delivered by VOID Tech Solutions.';
+            const overlayText = project.overlayText && project.overlayText.trim().length
+                ? project.overlayText
+                : description;
+            const galleryImages = Array.isArray(project.gallery) && project.gallery.length
+                ? project.gallery
+                : [project.image];
+            const slides = galleryImages.map((imageSrc) => `
+                <div class="swiper-slide project-slide">
+                    <img src="${imageSrc}" alt="${project.title}" loading="lazy">
+                    <div class="project-slide-overlay">${overlayText}</div>
+                </div>
+            `).join('');
+            const slideLabel = galleryImages.length > 1 ? 'Swipe gallery' : 'Project preview';
+            return `
+                <article class="project-card">
+                    <div class="img-wrap">
+                        <div class="swiper project-swiper">
+                            <div class="swiper-wrapper">
+                                ${slides}
+                            </div>
+                            ${galleryImages.length > 1 ? '<div class="swiper-pagination"></div>' : ''}
+                        </div>
+                        <span class="project-slide-label">${slideLabel}</span>
+                    </div>
+                    <div class="content">
+                        <div class="project-badges">${tags}</div>
+                        <h3>${project.title}</h3>
+                        <span class="project-meta"><i class="las la-map-marker-alt"></i> ${project.location}</span>
+                        <p class="project-desc">${description}</p>
+                        <a class="project-link" href="${project.link}" target="_blank" rel="noopener noreferrer">View Project <i class="iconoir-arrow-up-right"></i></a>
+                    </div>
+                </article>
+            `;
+        }
+
+        projectsGrid.innerHTML = projectsData.map(projectTemplate).join('');
+
+        document.querySelectorAll('.project-swiper').forEach((sliderElement) => {
+            const totalSlides = sliderElement.querySelectorAll('.swiper-slide').length;
+            const config = {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                speed: 700,
+                allowTouchMove: totalSlides > 1
+            };
+
+            if (totalSlides > 1) {
+                config.loop = true;
+                config.autoplay = {
+                    delay: 2800,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+                };
+                config.pagination = {
+                    el: sliderElement.querySelector('.swiper-pagination'),
+                    clickable: true
+                };
+            }
+
+            new Swiper(sliderElement, config);
+        });
+    </script>
+</body>
+
+</html>
