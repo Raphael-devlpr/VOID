@@ -2552,6 +2552,8 @@
     .header-area .navbar-wrapper .close-menu-bar {
         z-index: 10001;
         pointer-events: auto;
+        top: 8px;
+        right: 20px;
     }
     .header-area .header-left .header-left-right {
         display: flex;
