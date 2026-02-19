@@ -12,7 +12,9 @@
     $(document).on('click', '.header-area .menu-bar', function() {
         $('.header-area .navbar-wrapper').addClass('active');
     })
-    $(document).on('click', '.header-area .navbar-wrapper .close-menu-bar', function() {
+    $(document).on('click', '.header-area .navbar-wrapper .close-menu-bar', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         $('.header-area .navbar-wrapper').removeClass('active');
     })
 
