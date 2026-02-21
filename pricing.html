@@ -214,9 +214,23 @@
             </a>
           </div>
 
+          <!-- Package Section Header -->
+          <div class="packages-header">
+            <div class="packages-divider">
+              <span class="divider-line"></span>
+              <span class="divider-text">
+                <i class="las la-box"></i>
+                View Our Packages
+              </span>
+              <span class="divider-line"></span>
+            </div>
+            <p class="packages-subtitle">Choose from our pre-built packages below or create your own above</p>
+          </div>
+
           <div class="pricing-table-lists">
             <button class="accordion" id="pricing-website">
               Website Development
+              <span class="accordion-icon"><i class="las la-eye"></i> view</span>
             </button>
             <div class="panel">
               <div class="pricing-table-box">
@@ -326,6 +340,7 @@
 
             <button class="accordion" id="pricing-app">
               Application Development
+              <span class="accordion-icon"><i class="las la-eye"></i> view</span>
             </button>
             <div class="panel">
               <div class="pricing-table-box">
@@ -424,7 +439,8 @@
             </div>
 
             <button class="accordion" id="pricing-api">
-              API Integration and Development
+              API Integration & Development
+              <span class="accordion-icon"><i class="las la-eye"></i> view</span>
             </button>
            <div class="panel">
   <div class="pricing-table-box">
@@ -490,6 +506,7 @@
 
             <button class="accordion" id="pricing-ecommerce">
               E-Commerce & Online Stores
+              <span class="accordion-icon"><i class="las la-eye"></i> view</span>
             </button>
            <div class="panel">
 <div class="pricing-table-box">
@@ -544,6 +561,63 @@
       </section>
 
       <style>
+        /* Packages Header Styles */
+        .packages-header {
+          text-align: center;
+          margin: 60px auto 40px auto;
+          max-width: 800px;
+          padding: 0 20px;
+        }
+        .packages-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          margin-bottom: 12px;
+        }
+        .divider-line {
+          flex: 1;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #667eea, transparent);
+          max-width: 200px;
+        }
+        .divider-text {
+          font-family: 'Syne', sans-serif;
+          font-size: 24px;
+          font-weight: 600;
+          color: #667eea;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          white-space: nowrap;
+        }
+        .divider-text i {
+          font-size: 28px;
+        }
+        .packages-subtitle {
+          color: #666;
+          font-size: 16px;
+          margin: 0;
+          font-style: italic;
+        }
+        @media (max-width: 768px) {
+          .packages-header {
+            margin: 40px auto 30px auto;
+          }
+          .divider-text {
+            font-size: 20px;
+          }
+          .divider-text i {
+            font-size: 24px;
+          }
+          .divider-line {
+            max-width: 60px;
+          }
+          .packages-subtitle {
+            font-size: 14px;
+          }
+        }
+
         /* Accordion styles */
         .pricing-table-area .pricing-table-lists {
           max-width: 900px;
@@ -571,17 +645,25 @@
           background-color: #e2e6ea;
           box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
         }
-        .accordion:after {
-          content: "\002B";
-          color: #777;
+        .accordion-icon {
           float: right;
-          font-size: 28px;
-          margin-left: 10px;
-          transition: transform 0.2s;
+          color: #667eea;
+          font-size: 16px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          text-transform: lowercase;
+          transition: all 0.2s;
         }
-        .accordion.active:after {
-          content: "\2212";
-          transform: rotate(180deg);
+        .accordion-icon i {
+          font-size: 20px;
+        }
+        .accordion.active .accordion-icon i {
+          transform: scale(1.1);
+        }
+        .accordion:hover .accordion-icon {
+          color: #764ba2;
         }
         .panel {
           padding: 0 0 24px 0;
