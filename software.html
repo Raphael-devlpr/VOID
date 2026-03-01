@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Software Store | VOID Tech Solutions</title>
+    <meta
+      name="description"
+      content="Private software sales page for CorelDRAW, Adobe Photoshop, and Microsoft Office downloads."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/imgs/logo1.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/imgs/logo1.png" />
+    <link rel="shortcut icon" href="/assets/imgs/logo1.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,100;1,9..40,200;1,9..40,300;1,9..40,400;1,9..40,500;1,9..40,600&family=Syne:wght@400;500;600&family=Yantramanav:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+    <style>
+      .software-page-wrap {
+        padding: 140px 0 80px;
+      }
+
+      .software-title-block {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .software-title-block h1 {
+        margin-bottom: 12px;
+      }
+
+      .software-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+      }
+
+      .software-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+        border: 1px solid #f0f0f0;
+      }
+
+      .software-visual {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
+
+      .software-visual img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .software-tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(12, 18, 34, 0.75);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+      }
+
+      .software-card h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .software-card p {
+        margin-bottom: 20px;
+      }
+
+      .software-card .theme-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .pin-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(12, 18, 34, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 20px;
+      }
+
+      .pin-box {
+        width: 100%;
+        max-width: 420px;
+        background: #fff;
+        border-radius: 14px;
+        padding: 28px;
+        text-align: center;
+      }
+
+      .pin-box h3 {
+        margin-bottom: 8px;
+      }
+
+      .pin-box p {
+        margin-bottom: 14px;
+      }
+
+      .pin-box input {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+      }
+
+      .pin-error {
+        color: #dc3545;
+        display: none;
+        margin-top: 8px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="main-page software-page">
+      <header class="header-area">
+        <div class="custom-container">
+          <div class="custom-row align-items-center justify-content-between">
+            <div class="header-left d-flex align-items-center">
+              <a
+                class="logo"
+                href="/"
+                style="display: flex; flex-direction: column; align-items: center"
+              >
+                <img
+                  src="/assets/imgs/logo1.png"
+                  alt="Logo"
+                  style="max-height: 50px; width: auto"
+                />
+                <span
+                  style="font-family: 'Syne', 'DM Sans', Arial, sans-serif; font-weight: 700; font-size: 1.2rem; color: #222; letter-spacing: 2px; margin-top: 4px"
+                  >VOID</span
+                >
+              </a>
+              <div class="header-left-right">
+                <a href="index.html#contact-section" class="theme-btn">Contact Us</a>
+                <span class="menu-bar">
+                  <i class="las la-bars"></i>
+                </span>
+              </div>
+            </div>
+            <nav class="navbar-wrapper">
+              <span class="close-menu-bar">
+                <i class="las la-times"></i>
+              </span>
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="#">FAQ</a></li>
+              </ul>
+            </nav>
+            <div class="header-right">
+              <div class="header-contact-info d-flex align-items-center">
+                <div class="phone-number">
+                  <a href="tel:+27658335278">
+                    Call Us
+                    <i class="iconoir-arrow-up-right"></i>
+                  </a>
+                  <img
+                    src="https://flagcdn.com/w20/za.png"
+                    alt="South African flag"
+                    style="width: 20px; height: auto; vertical-align: middle; margin-right: 6px"
+                  />+27 65 833 5278
+                </div>
+                <a href="index.html#contact-section" class="theme-btn">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="software-page-wrap">
+        <div class="custom-container">
+          <div class="software-title-block">
+            <h5 class="section-subtitle">Private Software Sales</h5>
+            <h1 class="section-title">Available Software Downloads</h1>
+            <p>
+              Choose your software package below and click download.
+            </p>
+          </div>
+
+          <div class="software-grid">
+            <article class="software-card">
+              <div class="software-visual">
+                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80" alt="CorelDRAW vector design software" />
+                <span class="software-tag">CorelDRAW</span>
+              </div>
+              <h3>CorelDRAW</h3>
+              <p>Vector design suite package for branding, signage, and print work.</p>
+              <a
+                class="theme-btn"
+                href="https://drive.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download
+                <i class="las la-download"></i>
+              </a>
+            </article>
+
+            <article class="software-card">
+              <div class="software-visual">
+                <img src="https://images.unsplash.com/photo-1609921141835-710b7fa6e438?auto=format&fit=crop&w=1200&q=80" alt="Adobe Photoshop photo editing software" />
+                <span class="software-tag">Photoshop</span>
+              </div>
+              <h3>Adobe Photoshop</h3>
+              <p>Professional image editing package for graphics and photo retouching.</p>
+              <a
+                class="theme-btn"
+                href="https://drive.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download
+                <i class="las la-download"></i>
+              </a>
+            </article>
+
+            <article class="software-card">
+              <div class="software-visual">
+                <img src="https://images.unsplash.com/photo-1633419461186-7d40a38105ec?auto=format&fit=crop&w=1200&q=80" alt="Microsoft Office productivity software" />
+                <span class="software-tag">MS Office</span>
+              </div>
+              <h3>Microsoft Office</h3>
+              <p>Office productivity package with Word, Excel, PowerPoint, and more.</p>
+              <a
+                class="theme-btn"
+                href="https://drive.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download
+                <i class="las la-download"></i>
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="pin-overlay" id="pinOverlay" role="dialog" aria-modal="true" aria-labelledby="pinTitle">
+      <div class="pin-box">
+        <h3 id="pinTitle">Enter Access PIN</h3>
+        <p>This page is private. Enter your PIN to continue.</p>
+        <input type="password" id="pinInput" placeholder="Enter PIN" autocomplete="off" />
+        <button class="theme-btn" id="pinUnlockBtn">Unlock Page</button>
+        <div class="pin-error" id="pinError">Incorrect PIN. Please try again.</div>
+      </div>
+    </div>
+
+    <script src="/assets/js/jquery-3.7.0.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/gsap.min.js"></script>
+    <script src="/assets/js/Draggable.min.js"></script>
+    <script src="/assets/js/swiper-bundle.min.js"></script>
+    <script src="/assets/js/client-marquee.js"></script>
+    <script src="/assets/js/theme-custom.js"></script>
+    <script src="/assets/js/form1.js"></script>
+    <script src="/assets/js/subscribe-form.js"></script>
+
+    <script>
+      (function () {
+        const pinOverlay = document.getElementById('pinOverlay');
+        const pinInput = document.getElementById('pinInput');
+        const pinUnlockBtn = document.getElementById('pinUnlockBtn');
+        const pinError = document.getElementById('pinError');
+
+        function showPinError(message) {
+          pinError.textContent = message;
+          pinError.style.display = 'block';
+        }
+
+        async function unlockPage() {
+          const enteredPin = pinInput.value.trim();
+
+          if (!enteredPin) {
+            showPinError('Please enter a PIN.');
+            return;
+          }
+
+          // Disable button during validation
+          pinUnlockBtn.disabled = true;
+          pinUnlockBtn.textContent = 'Validating...';
+
+          try {
+            const response = await fetch('/pin-manager.php?action=validate', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pin: enteredPin })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+              pinError.style.display = 'none';
+              pinOverlay.style.display = 'none';
+              document.body.style.overflow = 'auto';
+              pinInput.value = '';
+            } else {
+              showPinError(result.message);
+              pinInput.value = '';
+              pinInput.focus();
+            }
+          } catch (error) {
+            console.error('PIN validation error:', error);
+            showPinError('Connection error. Please try again.');
+          } finally {
+            pinUnlockBtn.disabled = false;
+            pinUnlockBtn.textContent = 'Unlock Page';
+          }
+        }
+
+        document.body.style.overflow = 'hidden';
+        pinInput.focus();
+
+        pinUnlockBtn.addEventListener('click', unlockPage);
+        pinInput.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter') {
+            unlockPage();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

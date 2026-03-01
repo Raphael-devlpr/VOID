@@ -1,0 +1,17 @@
+# Protect admin-pins.html with IP restriction
+# Uncomment and add your IP address below to restrict access
+
+# <Files "admin-pins.html">
+#     Order Deny,Allow
+#     Deny from all
+#     Allow from YOUR.IP.ADDRESS.HERE
+# </Files>
+
+# Protect pins-data.json from direct access
+<Files "pins-data.json">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+# Optional: Rename admin-pins.html to something harder to guess
+# Example: admin-pins.html -> manage-sys-config-2026.html
