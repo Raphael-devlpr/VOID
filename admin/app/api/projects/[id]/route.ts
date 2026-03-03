@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { supabase } from '@/lib/supabase';
 
-// GET single project
+// GET single project (Next.js 16 compatible)
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
