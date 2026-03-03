@@ -2,17 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { supabase } from '@/lib/supabase';
 
-// GET single project (Next.js 16 compatible)
+/**
+ * API Route: /api/projects/[id]
+ * Next.js 16 Dynamic Route Handler with Async Params
+ * Updated: 2026-03-03
+ */
+
+// GET single project - Next.js 16 requires async params
 export async function GET(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Verify authentication
     const session = await getSession();
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Extract project ID from async params
     const { id } = await context.params;
 
     // Fetch project
@@ -43,17 +51,19 @@ export async function GET(
   }
 }
 
-// PUT update project
+// PUT update project - Next.js 16 requires async params
 export async function PUT(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Verify authentication
     const session = await getSession();
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Extract project ID from async params
     const { id } = await context.params;
     const body = await request.json();
     const {
@@ -114,17 +124,19 @@ export async function PUT(
   }
 }
 
-// DELETE project
+// DELETE project - Next.js 16 requires async params
 export async function DELETE(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Verify authentication
     const session = await getSession();
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // Extract project ID from async params
     const { id } = await context.params;
 
     const { error } = await supabase
