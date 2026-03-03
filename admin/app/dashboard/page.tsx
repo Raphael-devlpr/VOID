@@ -6,7 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { FolderOpen, Key, Users, TrendingUp } from 'lucide-react';
+import { FolderOpen, Key, Users, TrendingUp, ArrowRight, Plus } from 'lucide-react';
 
 export default async function DashboardPage() {
   try {
