@@ -24,35 +24,36 @@ export default async function ProjectsPage() {
     }
 
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
         <Navbar adminName={session.name} />
         
         <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="mb-8 flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Projects</h1>
-              <p className="mt-2 text-gray-600">Manage all your client projects</p>
+              <h1 className="text-4xl font-bold text-gray-900">Projects</h1>
+              <p className="mt-2 text-lg text-gray-600">Manage all your client projects 📁</p>
             </div>
             <Link href="/projects/new">
-              <Button>
-                <Plus className="mr-2 h-4 w-4" />
+              <Button className="gap-2">
+                <Plus className="h-4 w-4" />
                 New Project
               </Button>
             </Link>
           </div>
 
           {/* Projects List */}
-          <Card>
-            <CardHeader>
-              <CardTitle>All Projects ({projects?.length || 0})</CardTitle>
+          <Card className="overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100">
+              <CardTitle className="text-xl font-bold text-gray-900">All Projects ({projects?.length || 0})</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               {!projects || projects.length === 0 ? (
-                <div className="py-12 text-center text-gray-500">
-                  <p>No projects yet.</p>
+                <div className="py-16 text-center">
+                  <div className="mb-4 text-6xl">📁</div>
+                  <p className="text-gray-500 mb-6 text-lg">No projects yet.</p>
                   <Link href="/projects/new">
-                    <Button className="mt-4">
-                      <Plus className="mr-2 h-4 w-4" />
+                    <Button className="gap-2">
+                      <Plus className="h-4 w-4" />
                       Create Your First Project
                     </Button>
                   </Link>
@@ -60,59 +61,59 @@ export default async function ProjectsPage() {
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="border-b border-gray-200">
+                    <thead className="bg-gray-50 border-b border-gray-200">
                       <tr>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                           Project
                         </th>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                           Client
                         </th>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                           Type
                         </th>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                           Status
                         </th>
-                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                           Created
                         </th>
-                        <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">
+                        <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                           Actions
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200">
+                    <tbody className="divide-y divide-gray-200 bg-white">
                       {projects.map((project) => (
-                        <tr key={project.id} className="hover:bg-gray-50">
-                          <td className="px-4 py-4">
+                        <tr key={project.id} className="hover:bg-gray-50 transition-colors">
+                          <td className="px-6 py-5">
                             <Link
                               href={`/projects/${project.id}`}
-                              className="font-medium text-gray-900 hover:text-blue-600"
+                              className="font-semibold text-gray-900 hover:text-blue-600 transition-colors"
                             >
                               {project.project_name}
                             </Link>
                           </td>
-                          <td className="px-4 py-4">
+                          <td className="px-6 py-5">
                             <div className="text-sm">
                               <div className="font-medium text-gray-900">{project.client_name}</div>
-                              <div className="text-gray-500">{project.client_email}</div>
+                              <div className="text-gray-500 mt-0.5">{project.client_email}</div>
                             </div>
                           </td>
-                          <td className="px-4 py-4 text-sm text-gray-900">
+                          <td className="px-6 py-5 text-sm font-medium text-gray-700">
                             {project.project_type || 'N/A'}
                           </td>
-                          <td className="px-4 py-4">
+                          <td className="px-6 py-5">
                             <Badge variant="status" status={project.status}>
                               {project.status}
                             </Badge>
                           </td>
-                          <td className="px-4 py-4 text-sm text-gray-500">
+                          <td className="px-6 py-5 text-sm text-gray-600">
                             {formatDate(project.created_at)}
                           </td>
-                          <td className="px-4 py-4 text-right">
+                          <td className="px-6 py-5 text-right">
                             <Link href={`/projects/${project.id}`}>
-                              <Button variant="ghost" size="sm">
+                              <Button variant="ghost" size="sm" className="hover:bg-blue-50 hover:text-blue-600">
                                 Edit
                               </Button>
                             </Link>
