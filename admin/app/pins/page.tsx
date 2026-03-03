@@ -106,60 +106,60 @@ export default function PinsPage() {
       <Navbar adminName={adminName} />
       <Toaster position="top-right" />
       
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Software PIN Manager</h1>
-          <p className="mt-2 text-lg text-gray-600">Generate and manage software activation PINs 🔑</p>
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:py-8 sm:px-6 lg:px-8">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Software PIN Manager</h1>
+          <p className="mt-1 sm:mt-2 text-base sm:text-lg text-gray-600">Generate and manage software activation PINs 🔑</p>
         </div>
 
         {/* Stats */}
-        <div className="mb-8 grid gap-6 sm:grid-cols-3">
+        <div className="mb-6 sm:mb-8 grid gap-4 sm:gap-6 grid-cols-3">
           <Card className="hover:shadow-xl transition-shadow duration-200">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total PINs</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Total PINs</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{stats.total}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.total}</div>
             </CardContent>
           </Card>
 
           <Card className="hover:shadow-xl transition-shadow duration-200">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Available</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Available</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-green-600">{stats.available}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-green-600">{stats.available}</div>
             </CardContent>
           </Card>
 
           <Card className="hover:shadow-xl transition-shadow duration-200">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Used</CardTitle>
+              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Used</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-gray-600">{stats.used}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-600">{stats.used}</div>
             </CardContent>
           </Card>
         </div>
 
         {/* Generate PINs */}
-        <Card className="mb-8">
+        <Card className="mb-6 sm:mb-8">
           <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50">
-            <CardTitle className="text-xl font-bold text-gray-900">Generate New PINs</CardTitle>
+            <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">Generate New PINs</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Input
                 type="number"
                 min="1"
                 max="100"
                 value={pinCount}
                 onChange={(e) => setPinCount(parseInt(e.target.value) || 1)}
-                className="max-w-xs"
+                className="w-full sm:max-w-xs"
                 placeholder="Number of PINs"
                 label="PIN Count"
               />
-              <Button onClick={handleGeneratePins} isLoading={isGenerating} className="gap-2 self-end">
+              <Button onClick={handleGeneratePins} isLoading={isGenerating} className="gap-2 sm:self-end w-full sm:w-auto">
                 <Plus className="h-4 w-4" />
                 {isGenerating ? 'Generating...' : 'Generate PINs'}
               </Button>
@@ -170,7 +170,7 @@ export default function PinsPage() {
         {/* PINs List */}
         <Card className="overflow-hidden">
           <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100">
-            <CardTitle className="text-xl font-bold text-gray-900">All PINs ({pins.length})</CardTitle>
+            <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">All PINs ({pins.length})</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             {pins.length === 0 ? (

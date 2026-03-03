@@ -41,21 +41,21 @@ export default async function DashboardPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
         <Navbar adminName={session.name} />
         
-        <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
-            <p className="mt-2 text-lg text-gray-600">Welcome back, {session.name}! 👋</p>
+        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Dashboard</h1>
+            <p className="mt-1 sm:mt-2 text-base sm:text-lg text-gray-600">Welcome back, {session.name}! 👋</p>
           </div>
 
           {/* Stats Grid */}
-          <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mb-6 sm:mb-8 grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
             <Card className="hover:shadow-xl transition-shadow duration-200">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">Total Projects</CardTitle>
-                <FolderOpen className="h-5 w-5 text-blue-600" />
+                <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Total Projects</CardTitle>
+                <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-gray-900">{totalProjects}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-gray-900">{totalProjects}</div>
                 <p className="text-xs text-gray-500 mt-1">
                   {activeProjects} active
                 </p>
@@ -64,11 +64,11 @@ export default async function DashboardPage() {
 
             <Card className="hover:shadow-xl transition-shadow duration-200">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">Active Projects</CardTitle>
-                <TrendingUp className="h-5 w-5 text-green-600" />
+                <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Active Projects</CardTitle>
+                <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-gray-900">{activeProjects}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-gray-900">{activeProjects}</div>
                 <p className="text-xs text-gray-500 mt-1">
                   In progress
                 </p>
@@ -77,11 +77,11 @@ export default async function DashboardPage() {
 
             <Card className="hover:shadow-xl transition-shadow duration-200">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">Completed</CardTitle>
-                <Users className="h-5 w-5 text-purple-600" />
+                <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Completed</CardTitle>
+                <Users className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-gray-900">{completedProjects}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-gray-900">{completedProjects}</div>
                 <p className="text-xs text-gray-500 mt-1">
                   All time
                 </p>
@@ -90,11 +90,11 @@ export default async function DashboardPage() {
 
             <Card className="hover:shadow-xl transition-shadow duration-200">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">Available PINs</CardTitle>
-                <Key className="h-5 w-5 text-amber-600" />
+                <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Available PINs</CardTitle>
+                <Key className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-gray-900">{availablePins}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-gray-900">{availablePins}</div>
                 <p className="text-xs text-gray-500 mt-1">
                   {usedPins} used / {totalPins} total
                 </p>
@@ -104,8 +104,8 @@ export default async function DashboardPage() {
 
           {/* Recent Projects */}
           <Card className="overflow-hidden">
-            <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-gray-50 to-gray-100">
-              <CardTitle className="text-xl font-bold text-gray-900">Recent Projects</CardTitle>
+            <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gradient-to-r from-gray-50 to-gray-100">
+              <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">Recent Projects</CardTitle>
               <Link href="/projects">
                 <Button variant="ghost" size="sm" className="gap-2">
                   View All
@@ -130,25 +130,25 @@ export default async function DashboardPage() {
                   {recentProjects.map((project) => (
                     <div
                       key={project.id}
-                      className="flex items-center justify-between border-b border-gray-100 pb-4 last:border-0 hover:bg-gray-50 rounded-lg p-4 -m-4 last:mb-0 transition-colors"
+                      className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4 last:border-0 hover:bg-gray-50 rounded-lg p-4 -m-4 last:mb-0 transition-colors"
                     >
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <Link
                           href={`/projects/${project.id}`}
-                          className="font-semibold text-gray-900 hover:text-blue-600 transition-colors"
+                          className="font-semibold text-gray-900 hover:text-blue-600 transition-colors block truncate"
                         >
                           {project.project_name}
                         </Link>
-                        <p className="text-sm text-gray-500 mt-1">{project.client_name}</p>
+                        <p className="text-sm text-gray-500 mt-1 truncate">{project.client_name}</p>
                       </div>
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
                         <Badge variant="status" status={project.status}>
                           {project.status}
                         </Badge>
                         <Link href={`/projects/${project.id}`}>
                           <Button variant="ghost" size="sm" className="gap-2">
                             <ArrowRight className="h-4 w-4" />
-                            View
+                            <span className="hidden sm:inline">View</span>
                           </Button>
                         </Link>
                       </div>

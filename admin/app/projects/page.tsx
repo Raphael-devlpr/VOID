@@ -27,14 +27,14 @@ export default async function ProjectsPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
         <Navbar adminName={session.name} />
         
-        <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="mb-8 flex items-center justify-between">
+        <main className="mx-auto max-w-7xl px-4 py-6 sm:py-8 sm:px-6 lg:px-8">
+          <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900">Projects</h1>
-              <p className="mt-2 text-lg text-gray-600">Manage all your client projects 📁</p>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Projects</h1>
+              <p className="mt-1 sm:mt-2 text-base sm:text-lg text-gray-600">Manage all your client projects 📁</p>
             </div>
             <Link href="/projects/new">
-              <Button className="gap-2">
+              <Button className="gap-2 w-full sm:w-auto">
                 <Plus className="h-4 w-4" />
                 New Project
               </Button>
@@ -44,7 +44,7 @@ export default async function ProjectsPage() {
           {/* Projects List */}
           <Card className="overflow-hidden">
             <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100">
-              <CardTitle className="text-xl font-bold text-gray-900">All Projects ({projects?.length || 0})</CardTitle>
+              <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">All Projects ({projects?.length || 0})</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
               {!projects || projects.length === 0 ? (
