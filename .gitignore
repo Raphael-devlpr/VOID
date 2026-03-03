@@ -19,5 +19,29 @@ desktop.ini
 # node_modules/
 # .env
 
+# Old assets folder at root (now in website/)
+/assets/
+
+# Next.js Admin Dashboard
+/admin/node_modules/
+/admin/.next/
+/admin/.env.local
+/admin/.env*.local
+/admin/out/
+/admin/build/
+
+# Guide/Documentation Files (sensitive setup info)
+/admin/NEXTJS-SUPABASE-SETUP-GUIDE.md
+/admin/QUICK-REFERENCE.md
+/admin/LEARNING-JOURNEY.md
+ADMIN-SYSTEM-DEPLOYMENT-GUIDE.md
+DEPLOYMENT-GUIDE-PINS.md
+
+# Sensitive Files
+*.json.backup
+projects-data.json
+pins-data.json
+.htaccess-admin
+
 # cPanel specific
 error_log

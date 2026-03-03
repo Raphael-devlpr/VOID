@@ -1,0 +1,73 @@
+===============================================
+GOOGLE ANALYTICS 4 SETUP FOR VOID TECH SOLUTIONS
+===============================================
+
+STEP 1: Create Google Analytics Account
+----------------------------------------
+1. Go to: https://analytics.google.com
+2. Click "Start measuring"
+3. Account name: VOID Tech Solutions
+4. Property name: VoidTech Website
+5. Time zone: South Africa (SAST)
+6. Currency: ZAR (South African Rand)
+
+STEP 2: Set Up Data Stream
+----------------------------------------
+1. Choose "Web"
+2. Website URL: https://voidtechsolutions.co.za
+3. Stream name: Main Website
+4. Click "Create stream"
+
+STEP 3: Get Your Measurement ID
+----------------------------------------
+After creating the stream, you'll see:
+Measurement ID: G-XXXXXXXXXX
+
+Copy this ID - you'll need it!
+
+STEP 4: Add Tracking Code to Your Website
+----------------------------------------
+I'll add this to your index.html automatically.
+The code looks like this:
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+Replace G-XXXXXXXXXX with your actual Measurement ID.
+
+STEP 5: Connect Search Console to Analytics
+----------------------------------------
+1. In Google Analytics, go to Admin (gear icon)
+2. Under Property, click "Product Links"
+3. Click "Search Console Links"
+4. Click "Link"
+5. Choose your Search Console property
+6. Click "Next" then "Submit"
+
+✅ Now your Analytics and Search Console are connected!
+
+STEP 6: Verify It's Working
+----------------------------------------
+1. Visit your website
+2. Go back to Analytics
+3. Click "Reports" > "Realtime"
+4. You should see yourself as an active user!
+
+===============================================
+WHAT YOU'LL TRACK:
+===============================================
+✅ Visitors per day/week/month
+✅ Which pages are most popular
+✅ Where visitors come from (Google, Facebook, direct, etc.)
+✅ Which keywords bring traffic
+✅ Conversion rates (contact form submissions)
+✅ Mobile vs Desktop users
+✅ Bounce rate and session duration
+
+===============================================

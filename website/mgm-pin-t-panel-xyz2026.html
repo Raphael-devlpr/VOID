@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIN Manager | VOID Tech Solutions</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/imgs/logo1.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Syne:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: #f5f7fa;
+        padding: 20px;
+        color: #1e293b;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        background: #fff;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .header h1 {
+        font-family: "Syne", sans-serif;
+        font-size: 28px;
+        color: #0c1222;
+      }
+
+      .header p {
+        color: #64748b;
+        margin-top: 4px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .stat-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .stat-label {
+        color: #64748b;
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+
+      .stat-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: #0c1222;
+      }
+
+      .section {
+        background: #fff;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 24px;
+      }
+
+      .section-title {
+        font-family: "Syne", sans-serif;
+        font-size: 20px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s;
+      }
+
+      .btn-primary {
+        background: #0c1222;
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background: #1e293b;
+        transform: translateY(-2px);
+      }
+
+      .btn-danger {
+        background: #dc3545;
+        color: #fff;
+      }
+
+      .btn-danger:hover {
+        background: #c82333;
+      }
+
+      .btn-secondary {
+        background: #64748b;
+        color: #fff;
+      }
+
+      .btn-secondary:hover {
+        background: #475569;
+      }
+
+      .btn-small {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .input-group input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .pin-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .pin-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        background: #f8fafc;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .pin-code {
+        font-family: "Courier New", monospace;
+        font-size: 18px;
+        font-weight: 700;
+        color: #0c1222;
+      }
+
+      .pin-badge {
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .badge-active {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .badge-used {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .used-pins-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+      }
+
+      .used-pins-table th {
+        background: #f8fafc;
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+        color: #475569;
+        border-bottom: 2px solid #e2e8f0;
+      }
+
+      .used-pins-table td {
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .alert {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        display: none;
+      }
+
+      .alert-success {
+        background: #d1fae5;
+        color: #065f46;
+        border: 1px solid #6ee7b7;
+      }
+
+      .alert-error {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #64748b;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #94a3b8;
+      }
+
+      .auth-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(12, 18, 34, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+
+      .auth-box {
+        width: 100%;
+        max-width: 420px;
+        background: #fff;
+        border-radius: 14px;
+        padding: 32px;
+        text-align: center;
+      }
+
+      .auth-box h2 {
+        font-family: "Syne", sans-serif;
+        margin-bottom: 8px;
+      }
+
+      .auth-box p {
+        color: #64748b;
+        margin-bottom: 20px;
+      }
+
+      .auth-box input {
+        width: 100%;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+
+      .auth-error {
+        color: #dc3545;
+        display: none;
+        margin-top: 8px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 12px;
+        }
+
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="authOverlay" class="auth-overlay">
+      <div class="auth-box">
+        <h2>Admin Access</h2>
+        <p>Enter your admin password to continue</p>
+        <input
+          type="password"
+          id="adminPasswordInput"
+          placeholder="Admin Password"
+          autocomplete="off"
+        />
+        <button class="btn btn-primary" id="authSubmitBtn" style="width: 100%">
+          Unlock Dashboard
+        </button>
+        <div class="auth-error" id="authError">Incorrect password. Please try again.</div>
+      </div>
+    </div>
+
+    <div class="container" id="mainContainer" style="display: none">
+      <div class="header">
+        <div>
+          <h1>PIN Manager</h1>
+          <p>Manage software page access PINs</p>
+        </div>
+        <button class="btn btn-secondary" onclick="refreshData()">
+          <i class="las la-sync"></i> Refresh
+        </button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Active PINs</div>
+          <div class="stat-value" id="activeCount">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Used PINs</div>
+          <div class="stat-value" id="usedCount">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Available PINs</div>
+          <div class="stat-value" id="availableCount">-</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Add New PIN</h2>
+        <div id="alertAdd" class="alert"></div>
+        <div class="input-group">
+          <input
+            type="text"
+            id="newPinInput"
+            placeholder="Enter new PIN (e.g., 12345)"
+            maxlength="10"
+          />
+          <button class="btn btn-primary" onclick="addPin()">
+            <i class="las la-plus"></i> Add PIN
+          </button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">
+          Active PINs
+          <span id="activePinCount" style="color: #64748b; font-size: 16px"></span>
+        </h2>
+        <div id="activePinsList" class="pin-list">
+          <div class="loading">Loading...</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">
+          Used PINs History
+          <button class="btn btn-danger btn-small" onclick="clearUsedPins()">
+            <i class="las la-trash"></i> Clear History
+          </button>
+        </h2>
+        <div id="usedPinsList">
+          <div class="loading">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const ADMIN_KEY = "Raphael";
+      const ADMIN_PASSWORD = "HouseNumber84!"; // Change this to your own password
+      let isAuthenticated = false;
+
+      // Authentication handler
+      function checkAuthentication() {
+        const authOverlay = document.getElementById('authOverlay');
+        const mainContainer = document.getElementById('mainContainer');
+        const passwordInput = document.getElementById('adminPasswordInput');
+        const authSubmitBtn = document.getElementById('authSubmitBtn');
+        const authError = document.getElementById('authError');
+
+        function attemptAuth() {
+          const enteredPassword = passwordInput.value.trim();
+
+          if (enteredPassword === ADMIN_PASSWORD) {
+            isAuthenticated = true;
+            authOverlay.style.display = 'none';
+            mainContainer.style.display = 'block';
+            authError.style.display = 'none';
+            loadPinData();
+          } else {
+            authError.style.display = 'block';
+            passwordInput.value = '';
+            passwordInput.focus();
+          }
+        }
+
+        authSubmitBtn.addEventListener('click', attemptAuth);
+        passwordInput.addEventListener('keydown', function(event) {
+          if (event.key === 'Enter') {
+            attemptAuth();
+          }
+        });
+
+        passwordInput.focus();
+      }
+
+      checkAuthentication();
+
+      async function loadPinData() {
+        try {
+          const response = await fetch(`/pin-manager.php?action=getAll&key=${ADMIN_KEY}`);
+          const result = await response.json();
+
+          if (!result.success) {
+            alert("Error: " + result.message);
+            return;
+          }
+
+          const data = result.data;
+
+          // Update stats
+          document.getElementById("activeCount").textContent = data.activePins.length;
+          document.getElementById("usedCount").textContent = data.usedPins.length;
+          document.getElementById("availableCount").textContent =
+            data.activePins.length - data.usedPins.filter(u => 
+              data.activePins.includes(u.pin)
+            ).length;
+
+          // Render active PINs
+          renderActivePins(data.activePins);
+
+          // Render used PINs
+          renderUsedPins(data.usedPins);
+        } catch (error) {
+          console.error("Error loading data:", error);
+          alert("Failed to load PIN data");
+        }
+      }
+
+      function renderActivePins(pins) {
+        const container = document.getElementById("activePinsList");
+        document.getElementById("activePinCount").textContent = `(${pins.length})`;
+
+        if (pins.length === 0) {
+          container.innerHTML = '<div class="empty-state">No active PINs. Add one above.</div>';
+          return;
+        }
+
+        container.innerHTML = pins
+          .map(
+            (pin) => `
+          <div class="pin-item">
+            <div>
+              <span class="pin-code">${pin}</span>
+              <span class="pin-badge badge-active">ACTIVE</span>
+            </div>
+            <button class="btn btn-danger btn-small" onclick="deletePin('${pin}')">
+              <i class="las la-trash"></i> Delete
+            </button>
+          </div>
+        `
+          )
+          .join("");
+      }
+
+      function renderUsedPins(usedPins) {
+        const container = document.getElementById("usedPinsList");
+
+        if (usedPins.length === 0) {
+          container.innerHTML = '<div class="empty-state">No PINs have been used yet.</div>';
+          return;
+        }
+
+        container.innerHTML = `
+          <table class="used-pins-table">
+            <thead>
+              <tr>
+                <th>PIN</th>
+                <th>Date & Time</th>
+                <th>IP Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${usedPins
+                .map(
+                  (item) => `
+                <tr>
+                  <td><strong>${item.pin}</strong></td>
+                  <td>${item.timestamp}</td>
+                  <td>${item.ip}</td>
+                </tr>
+              `
+                )
+                .join("")}
+            </tbody>
+          </table>
+        `;
+      }
+
+      async function addPin() {
+        const input = document.getElementById("newPinInput");
+        const pin = input.value.trim();
+        const alertDiv = document.getElementById("alertAdd");
+
+        if (!pin) {
+          showAlert(alertDiv, "Please enter a PIN", "error");
+          return;
+        }
+
+        try {
+          const response = await fetch("/pin-manager.php?action=addPin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ key: ADMIN_KEY, pin: pin }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            showAlert(alertDiv, "PIN added successfully!", "success");
+            input.value = "";
+            await loadPinData();
+          } else {
+            showAlert(alertDiv, result.message, "error");
+          }
+        } catch (error) {
+          showAlert(alertDiv, "Failed to add PIN", "error");
+        }
+      }
+
+      async function deletePin(pin) {
+        if (!confirm(`Delete PIN: ${pin}?`)) return;
+
+        try {
+          const response = await fetch("/pin-manager.php?action=deletePin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ key: ADMIN_KEY, pin: pin }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            await loadPinData();
+          } else {
+            alert("Error: " + result.message);
+          }
+        } catch (error) {
+          alert("Failed to delete PIN");
+        }
+      }
+
+      async function clearUsedPins() {
+        if (!confirm("Clear all used PINs history? This cannot be undone.")) return;
+
+        try {
+          const response = await fetch("/pin-manager.php?action=clearUsed", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ key: ADMIN_KEY }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            await loadPinData();
+          } else {
+            alert("Error: " + result.message);
+          }
+        } catch (error) {
+          alert("Failed to clear history");
+        }
+      }
+
+      function refreshData() {
+        loadPinData();
+      }
+
+      function showAlert(element, message, type) {
+        element.className = `alert alert-${type}`;
+        element.textContent = message;
+        element.style.display = "block";
+
+        setTimeout(() => {
+          element.style.display = "none";
+        }, 4000);
+      }
+
+      // Auto-refresh every 30 seconds (only if authenticated)
+      setInterval(() => {
+        if (isAuthenticated) {
+          loadPinData();
+        }
+      }, 30000);
+    </script>
+  </body>
+</html>
