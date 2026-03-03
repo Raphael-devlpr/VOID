@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase';
  * API Route: /api/projects/[id]
  * Next.js 16 Dynamic Route Handler with Async Params
  * Updated: 2026-03-03
+ * Build: v2
  */
 
 // GET single project - Next.js 16 requires async params
