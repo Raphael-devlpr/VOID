@@ -1,7 +1,7 @@
 // Generate a bcrypt hash for the password
 const bcrypt = require('bcryptjs');
 
-const password = 'Admin123!';
+const password = process.argv[2] || 'Admin123!';
 
 bcrypt.hash(password, 10, function(err, hash) {
   if (err) {
