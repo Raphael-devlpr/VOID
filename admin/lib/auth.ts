@@ -52,7 +52,7 @@ export async function loginAdmin(email: string, password: string): Promise<{ suc
     const { data: admin, error } = await supabase
       .from('admins')
       .select('*')
-      .or(`email.eq.${email},name.eq.${email}`)
+      .or(`email.eq."${email}",name.eq."${email}"`)
       .single();
 
     console.log('📊 Database response:', { admin: admin ? 'found' : 'not found', error });
