@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -9,10 +9,18 @@ import { Button } from '@/components/ui/Button';
 import { ArrowLeft } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 
+interface Client {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export default function NewProjectPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [clients, setClients] = useState<Client[]>([]);
   const [formData, setFormData] = useState({
+    client_id: '',
     client_name: '',
     client_email: '',
     client_phone: '',
@@ -23,6 +31,22 @@ export default function NewProjectPage() {
     start_date: '',
     due_date: '',
   });
+
+  useEffect(() => {
+    fetchClients();
+  }, []);
+
+  const fetchClients = async () => {
+    try {
+      const response = await fetch('/api/clients');
+      if (response.ok) {
+        const data = await response.json();
+        setClients(data.clients || []);
+      }
+    } catch (error) {
+      console.error('Failed to fetch clients:', error);
+    }
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -55,6 +79,29 @@ export default function NewProjectPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleClientSelect = (e: any) => {
+    const clientId = e.target.value;
+    if (clientId) {
+      const selectedClient = clients.find(c => c.id === clientId);
+      if (selectedClient) {
+        setFormData(prev => ({
+          ...prev,
+          client_id: clientId,
+          client_name: selectedClient.name,
+          client_email: selectedClient.email,
+        }));
+      }
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        client_id: '',
+        client_name: '',
+        client_email: '',
+        client_phone: '',
+      }));
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <Toaster position="top-right" />
@@ -80,6 +127,24 @@ export default function NewProjectPage() {
               {/* Client Information */}
               <div className="space-y-4">
                 <h3 className="text-lg font-medium text-gray-900">Client Information</h3>
+                
+                {/* Client Portal Link (Optional) */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <Select
+                    label="Link to Portal Client (Optional)"
+                    name="client_id"
+                    value={formData.client_id}
+                    onChange={handleClientSelect}
+                    options={[
+                      { value: '', label: 'No portal link - Manual client info' },
+                      ...clients.map(c => ({ value: c.id, label: `${c.name} (${c.email})` }))
+                    ]}
+                  />
+                  <p className="text-xs text-blue-700 mt-2">
+                    Link this project to an existing client portal account, or enter client details manually below
+                  </p>
+                </div>
+
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Input
                     label="Client Name"
@@ -88,6 +153,7 @@ export default function NewProjectPage() {
                     onChange={handleChange}
                     placeholder="John Doe"
                     required
+                    disabled={!!formData.client_id}
                   />
                   <Input
                     label="Client Email"
@@ -97,6 +163,7 @@ export default function NewProjectPage() {
                     onChange={handleChange}
                     placeholder="john@example.com"
                     required
+                    disabled={!!formData.client_id}
                   />
                 </div>
                 <Input
@@ -106,6 +173,7 @@ export default function NewProjectPage() {
                   value={formData.client_phone}
                   onChange={handleChange}
                   placeholder="+27 12 345 6789"
+                  disabled={!!formData.client_id}
                 />
               </div>
 

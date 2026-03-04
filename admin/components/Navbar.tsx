@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { LayoutDashboard, FolderOpen, Key, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, FolderOpen, Key, LogOut, Menu, X, Users } from 'lucide-react';
 import { Button } from './ui/Button';
 
 export function Navbar({ adminName }: { adminName: string }) {
@@ -14,6 +14,7 @@ export function Navbar({ adminName }: { adminName: string }) {
   const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/projects', label: 'Projects', icon: FolderOpen },
+    { href: '/clients', label: 'Clients', icon: Users },
     { href: '/pins', label: 'PINs', icon: Key },
   ];
 
