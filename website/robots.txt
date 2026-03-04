@@ -1,6 +1,20 @@
+# VOID Tech Solutions - Robots Configuration
+# Updated: March 2026
+
 User-agent: *
+# Allow all pages on main website
 Allow: /
+
+# Disallow asset directories (improve crawl efficiency)
 Disallow: /assets/js/
 Disallow: /assets/css/
+
+# Block admin and internal management panels
+Disallow: /mgm-pin-t-panel-xyz2026.html
+Disallow: /pin-manager.php
+Disallow: /deploy-webhook.php
+
+# Note: Client portal is on separate domain (voidtechsolutions.vercel.app)
+# and has its own robots meta tags (noindex, nofollow)
 
 Sitemap: https://voidtechsolutions.co.za/sitemap.xml

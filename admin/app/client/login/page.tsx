@@ -58,6 +58,7 @@ export default function ClientLoginPage() {
               priority
             />
           </div>
+           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Client Portal</h1>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Client Portal</h1>
          
         </div>
