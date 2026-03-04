@@ -87,8 +87,7 @@ export default function LoginPage() {
             </Button>
           </form>
           <div className="mt-6 text-center text-xs sm:text-sm text-gray-500 border-t border-gray-200 pt-4">
-            <p className="font-semibold text-gray-700 mb-2">Development Credentials:</p>
-            <p className="font-mono text-xs bg-gray-50 rounded-md px-2 py-2 sm:px-3 break-all text-gray-900">admin@voidtechsolutions.co.za / Admin123!</p>
+          
           </div>
         </CardContent>
       </Card>
