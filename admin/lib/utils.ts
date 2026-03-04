@@ -32,9 +32,15 @@ export function formatCurrency(amount: number): string {
 export function getStatusColor(status: string): string {
   const colors: Record<string, string> = {
     pending: 'bg-yellow-100 text-yellow-800',
+    'data-received': 'bg-cyan-100 text-cyan-800',
     'in-progress': 'bg-blue-100 text-blue-800',
+    'awaiting-content': 'bg-orange-100 text-orange-800',
     review: 'bg-purple-100 text-purple-800',
+    'invoice-sent': 'bg-indigo-100 text-indigo-800',
+    'invoice-paid': 'bg-emerald-100 text-emerald-800',
+    deployed: 'bg-teal-100 text-teal-800',
     completed: 'bg-green-100 text-green-800',
+    maintenance: 'bg-amber-100 text-amber-800',
     'on-hold': 'bg-gray-100 text-gray-800',
   };
   return colors[status] || 'bg-gray-100 text-gray-800';

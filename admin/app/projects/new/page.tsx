@@ -228,9 +228,15 @@ export default function NewProjectPage() {
                     onChange={handleChange}
                     options={[
                       { value: 'pending', label: 'Pending' },
+                      { value: 'data-received', label: 'Data Received' },
                       { value: 'in-progress', label: 'In Progress' },
+                      { value: 'awaiting-content', label: 'Awaiting Content' },
                       { value: 'review', label: 'Review' },
+                      { value: 'invoice-sent', label: 'Invoice Sent' },
+                      { value: 'invoice-paid', label: 'Invoice Paid' },
+                      { value: 'deployed', label: 'Deployed/Live' },
                       { value: 'completed', label: 'Completed' },
+                      { value: 'maintenance', label: 'Maintenance' },
                       { value: 'on-hold', label: 'On Hold' },
                     ]}
                   />
