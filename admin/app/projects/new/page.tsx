@@ -13,6 +13,8 @@ interface Client {
   id: string;
   name: string;
   email: string;
+  phone?: string;
+  company?: string;
 }
 
 export default function NewProjectPage() {
@@ -24,6 +26,7 @@ export default function NewProjectPage() {
     client_name: '',
     client_email: '',
     client_phone: '',
+    client_company: '',
     project_name: '',
     project_type: 'website',
     status: 'pending',
@@ -89,6 +92,8 @@ export default function NewProjectPage() {
           client_id: clientId,
           client_name: selectedClient.name,
           client_email: selectedClient.email,
+          client_phone: selectedClient.phone || '',
+          client_company: selectedClient.company || '',
         }));
       }
     } else {
@@ -98,6 +103,7 @@ export default function NewProjectPage() {
         client_name: '',
         client_email: '',
         client_phone: '',
+        client_company: '',
       }));
     }
   };
@@ -166,15 +172,25 @@ export default function NewProjectPage() {
                     disabled={!!formData.client_id}
                   />
                 </div>
-                <Input
-                  label="Client Phone (Optional)"
-                  name="client_phone"
-                  type="tel"
-                  value={formData.client_phone}
-                  onChange={handleChange}
-                  placeholder="+27 12 345 6789"
-                  disabled={!!formData.client_id}
-                />
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Input
+                    label="Client Phone (Optional)"
+                    name="client_phone"
+                    type="tel"
+                    value={formData.client_phone}
+                    onChange={handleChange}
+                    placeholder="+27 12 345 6789"
+                    disabled={!!formData.client_id}
+                  />
+                  <Input
+                    label="Company (Optional)"
+                    name="client_company"
+                    value={formData.client_company}
+                    onChange={handleChange}
+                    placeholder="Company Name"
+                    disabled={!!formData.client_id}
+                  />
+                </div>
               </div>
 
               {/* Project Information */}
