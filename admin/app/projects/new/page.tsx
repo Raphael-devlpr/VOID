@@ -44,7 +44,6 @@ export default function NewProjectPage() {
       const response = await fetch('/api/clients');
       if (response.ok) {
         const data = await response.json();
-        console.log('📋 Fetched clients:', data.clients);
         setClients(data.clients || []);
       }
     } catch (error) {
@@ -85,12 +84,10 @@ export default function NewProjectPage() {
 
   const handleClientSelect = (e: any) => {
     const clientId = e.target.value;
- 
     
     if (clientId) {
       // Normalize comparison by converting both to strings
       const selectedClient = clients.find(c => String(c.id) === String(clientId));
-      console.log('✅ Found client:', selectedClient);
       
       if (selectedClient) {
         setFormData(prev => ({
@@ -103,7 +100,6 @@ export default function NewProjectPage() {
         }));
       }
     } else {
-      console.log('🔄 Clearing client selection');
       setFormData(prev => ({
         ...prev,
         client_id: '',
@@ -164,7 +160,7 @@ export default function NewProjectPage() {
                     name="client_name"
                     value={formData.client_name}
                     onChange={handleChange}
-                    placeholder="John Doe"
+                  
                     required
                     disabled={!!formData.client_id}
                   />
@@ -174,7 +170,7 @@ export default function NewProjectPage() {
                     type="email"
                     value={formData.client_email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
+               
                     required
                     disabled={!!formData.client_id}
                   />
@@ -186,7 +182,7 @@ export default function NewProjectPage() {
                     type="tel"
                     value={formData.client_phone}
                     onChange={handleChange}
-                    placeholder="+27 12 345 6789"
+                 
                     disabled={!!formData.client_id}
                   />
                   <Input
@@ -194,7 +190,7 @@ export default function NewProjectPage() {
                     name="client_company"
                     value={formData.client_company}
                     onChange={handleChange}
-                    placeholder="Company Name"
+             
                     disabled={!!formData.client_id}
                   />
                 </div>
@@ -208,7 +204,7 @@ export default function NewProjectPage() {
                   name="project_name"
                   value={formData.project_name}
                   onChange={handleChange}
-                  placeholder="E-commerce Website"
+               
                   required
                 />
                 <div className="grid gap-4 sm:grid-cols-2">

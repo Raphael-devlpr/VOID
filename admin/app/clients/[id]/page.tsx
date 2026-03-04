@@ -229,7 +229,7 @@ export default function EditClientPage() {
                     <Input
                       id="name"
                       type="text"
-                      placeholder="John Doe"
+                 
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
@@ -243,7 +243,7 @@ export default function EditClientPage() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="john@example.com"
+                 
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
@@ -271,7 +271,7 @@ export default function EditClientPage() {
                     <Input
                       id="company"
                       type="text"
-                      placeholder="Acme Corp"
+                    
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     />
@@ -284,7 +284,7 @@ export default function EditClientPage() {
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="+27 12 345 6789"
+            
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />

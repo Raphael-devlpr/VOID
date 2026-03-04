@@ -106,7 +106,7 @@ export default function NewClientPage() {
                   <Input
                     id="name"
                     type="text"
-                    placeholder="John Doe"
+                
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
@@ -120,7 +120,7 @@ export default function NewClientPage() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="john@example.com"
+                
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
@@ -135,7 +135,7 @@ export default function NewClientPage() {
                   <Input
                     id="password"
                     type="password"
-                    placeholder="••••••••"
+              
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     required
@@ -150,7 +150,7 @@ export default function NewClientPage() {
                   <Input
                     id="company"
                     type="text"
-                    placeholder="Acme Corp"
+               
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                   />
@@ -163,7 +163,7 @@ export default function NewClientPage() {
                   <Input
                     id="phone"
                     type="tel"
-                    placeholder="+27 12 345 6789"
+                
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />

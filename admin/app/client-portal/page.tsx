@@ -65,7 +65,7 @@ export default function ClientPortalPage() {
               <Input
                 label="Your Email Address"
                 type="email"
-                placeholder="your@email.com"
+              
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
