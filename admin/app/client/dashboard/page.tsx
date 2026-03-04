@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -80,13 +81,23 @@ export default function ClientDashboardPage() {
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <div>
-              <h1 className="text-lg sm:text-xl font-bold text-blue-600">VOID Client Portal</h1>
-              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Welcome, {client?.name}</p>
+            <div className="flex items-center gap-3">
+              <Image 
+                src="/logo.png" 
+                alt="VOID Tech Solutions Logo" 
+                width={40} 
+                height={40}
+                className="h-8 w-auto sm:h-10"
+                priority
+              />
+              <div>
+                <h1 className="text-lg sm:text-xl font-bold text-blue-600">VOID Client Portal</h1>
+                <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Welcome, {client?.name}</p>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <a 
-                href="/" 
+                href="https://voidtechsolutions.co.za" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600 transition-colors"

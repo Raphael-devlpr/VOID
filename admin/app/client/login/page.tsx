@@ -59,7 +59,7 @@ export default function ClientLoginPage() {
             />
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Client Portal</h1>
-          <p className="text-sm sm:text-base text-gray-600">Track your project progress</p>
+         
         </div>
         <Card className="w-full">
           <CardHeader>
@@ -71,7 +71,7 @@ export default function ClientLoginPage() {
               <Input
                 label="Email"
                 type="email"
-                placeholder="your@email.com"
+              
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
