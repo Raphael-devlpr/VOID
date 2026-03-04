@@ -6,7 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { Plus, Search } from 'lucide-react';
+import { Plus, Search, MessageSquare } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
 export default async function ProjectsPage() {
@@ -21,6 +21,22 @@ export default async function ProjectsPage() {
 
     if (error) {
       throw new Error('Failed to fetch projects');
+    }
+
+    // Fetch client notes counts for all projects
+    const projectIds = projects?.map(p => p.id) || [];
+    let noteCounts: Record<number, number> = {};
+    
+    if (projectIds.length > 0) {
+      const { data: notes } = await supabase
+        .from('client_notes')
+        .select('project_id')
+        .in('project_id', projectIds);
+      
+      // Count notes per project
+      notes?.forEach(note => {
+        noteCounts[note.project_id] = (noteCounts[note.project_id] || 0) + 1;
+      });
     }
 
     return (
@@ -78,6 +94,9 @@ export default async function ProjectsPage() {
                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                           Created
                         </th>
+                        <th className="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                          Messages
+                        </th>
                         <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                           Actions
                         </th>
@@ -110,6 +129,14 @@ export default async function ProjectsPage() {
                           </td>
                           <td className="px-6 py-5 text-sm text-gray-600">
                             {formatDate(project.created_at)}
+                          </td>
+                          <td className="px-6 py-5 text-center">
+                            {noteCounts[project.id] > 0 && (
+                              <div className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                                <MessageSquare className="h-3 w-3" />
+                                {noteCounts[project.id]}
+                              </div>
+                            )}
                           </td>
                           <td className="px-6 py-5 text-right">
                             <Link href={`/projects/${project.id}`}>

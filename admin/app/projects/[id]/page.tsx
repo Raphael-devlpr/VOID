@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Input, Textarea, Select } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
-import { ArrowLeft, Trash2 } from 'lucide-react';
+import { ArrowLeft, Trash2, MessageSquare } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { formatDate } from '@/lib/utils';
 
@@ -31,6 +31,7 @@ export default function EditProjectPage() {
     due_date: '',
   });
   const [history, setHistory] = useState<any[]>([]);
+  const [clientNotes, setClientNotes] = useState<any[]>([]);
 
   useEffect(() => {
     fetchProject();
@@ -53,6 +54,7 @@ export default function EditProjectPage() {
           due_date: data.project.due_date ? data.project.due_date.split('T')[0] : '',
         });
         setHistory(data.history || []);
+        setClientNotes(data.clientNotes || []);
       } else {
         toast.error('Project not found');
         router.push('/projects');
@@ -288,6 +290,51 @@ export default function EditProjectPage() {
               </CardContent>
             </Card>
           )}
+
+          {/* Client Messages/Notes */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="h-5 w-5" />
+                  Client Messages
+                  {clientNotes.length > 0 && (
+                    <Badge className="bg-blue-100 text-blue-800">
+                      {clientNotes.length}
+                    </Badge>
+                  )}
+                </CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {clientNotes.length === 0 ? (
+                <p className="text-sm text-gray-500 text-center py-8">
+                  No messages from client yet
+                </p>
+              ) : (
+                <div className="space-y-4">
+                  {clientNotes.map((note, index) => (
+                    <div 
+                      key={note.id} 
+                      className="bg-blue-50 border border-blue-200 rounded-lg p-4 relative"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <p className="text-sm text-gray-900 whitespace-pre-wrap">{note.note}</p>
+                          <p className="text-xs text-gray-500 mt-2">{formatDate(note.created_at)}</p>
+                        </div>
+                        {index === 0 && (
+                          <Badge className="bg-green-100 text-green-800 text-xs">
+                            Latest
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </main>
     </div>

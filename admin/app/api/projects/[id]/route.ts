@@ -42,9 +42,17 @@ export async function GET(
       .eq('project_id', id)
       .order('created_at', { ascending: false });
 
+    // Fetch client notes
+    const { data: clientNotes, error: notesError } = await supabase
+      .from('client_notes')
+      .select('*')
+      .eq('project_id', id)
+      .order('created_at', { ascending: false });
+
     return NextResponse.json({
       project,
       history: history || [],
+      clientNotes: clientNotes || [],
     }, { status: 200 });
   } catch (error) {
     console.error('Get project error:', error);
