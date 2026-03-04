@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
     const {
+      client_id,
       client_name,
       client_email,
       client_phone,
@@ -60,6 +61,7 @@ export async function POST(request: NextRequest) {
     const { data: project, error: insertError } = await supabase
       .from('projects')
       .insert({
+        client_id: client_id || null,
         client_name,
         client_email,
         client_phone: client_phone || null,
