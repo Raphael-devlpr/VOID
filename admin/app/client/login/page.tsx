@@ -91,7 +91,7 @@ export default function ClientLoginPage() {
             
             <div className="mt-6 text-center border-t border-gray-200 pt-4">
               <Link 
-                href="/" 
+                href="https://voidtechsolutions.co.za" 
                 className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" />
