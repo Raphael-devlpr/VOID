@@ -44,6 +44,7 @@ export default function NewProjectPage() {
       const response = await fetch('/api/clients');
       if (response.ok) {
         const data = await response.json();
+        console.log('📋 Fetched clients:', data.clients);
         setClients(data.clients || []);
       }
     } catch (error) {
@@ -84,8 +85,13 @@ export default function NewProjectPage() {
 
   const handleClientSelect = (e: any) => {
     const clientId = e.target.value;
+ 
+    
     if (clientId) {
-      const selectedClient = clients.find(c => c.id === clientId);
+      // Normalize comparison by converting both to strings
+      const selectedClient = clients.find(c => String(c.id) === String(clientId));
+      console.log('✅ Found client:', selectedClient);
+      
       if (selectedClient) {
         setFormData(prev => ({
           ...prev,
@@ -97,6 +103,7 @@ export default function NewProjectPage() {
         }));
       }
     } else {
+      console.log('🔄 Clearing client selection');
       setFormData(prev => ({
         ...prev,
         client_id: '',
