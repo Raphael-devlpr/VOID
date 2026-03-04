@@ -7,8 +7,29 @@ export interface Admin {
   created_at: string;
 }
 
+export interface Client {
+  id: string;
+  email: string;
+  password_hash: string;
+  name: string;
+  company?: string;
+  phone?: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ClientNote {
+  id: string;
+  project_id: string;
+  client_id: string;
+  note: string;
+  created_at: string;
+}
+
 export interface Project {
   id: string;
+  client_id?: string;
   client_name: string;
   client_email: string;
   client_phone?: string;
