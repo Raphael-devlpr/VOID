@@ -49,11 +49,23 @@ export async function loginAdmin(email: string, password: string): Promise<{ suc
     console.log('🔍 Login attempt for:', email);
     
     // Get admin from database - check both email and name fields
-    const { data: admin, error } = await supabase
+    // Try to find by email first, then by name
+    let { data: admin, error } = await supabase
       .from('admins')
       .select('*')
-      .or(`email.eq."${email}",name.eq."${email}"`)
-      .single();
+      .eq('name', email)
+      .maybeSingle();
+    
+    // If not found by name, try email
+    if (!admin) {
+      const result = await supabase
+        .from('admins')
+        .select('*')
+        .eq('email', email)
+        .maybeSingle();
+      admin = result.data;
+      error = result.error;
+    }
 
     console.log('📊 Database response:', { admin: admin ? 'found' : 'not found', error });
 
