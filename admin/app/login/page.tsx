@@ -57,12 +57,11 @@ export default function LoginPage() {
             />
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Void Tech Solutions</h1>
-          <p className="text-sm sm:text-base text-gray-600">Manage your projects and clients</p>
+  
         </div>
         <Card className="w-full">
         <CardHeader>
           <CardTitle className="text-xl sm:text-2xl">Welcome Back</CardTitle>
-          <CardDescription>Enter your credentials to access the admin dashboard</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
