@@ -56,7 +56,7 @@ export default function LoginPage() {
               priority
             />
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">VOID Admin</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Void Tech Solutions</h1>
           <p className="text-sm sm:text-base text-gray-600">Manage your projects and clients</p>
         </div>
         <Card className="w-full">
