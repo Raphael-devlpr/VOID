@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSession } from '@/lib/auth';
+import { requireAuth } from '@/lib/auth';
 import { supabase } from '@/lib/supabase';
 import { generatePin } from '@/lib/utils';
 
 // GET all PINs
 export async function GET(request: NextRequest) {
   try {
-    const session = await getSession();
+    const session = await requireAuth();
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
     const { data: pins, error } = await supabase
       .from('software_pins')
       .select('*')
@@ -31,13 +30,13 @@ export async function GET(request: NextRequest) {
 // POST generate new PINs
 export async function POST(request: NextRequest) {
   try {
-    const session = await getSession();
+    const session = await requireAuth();
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await request.json();
-    const { count = 1 } = body;
+    const { count = 1, notes } = body;
 
     if (count < 1 || count > 100) {
       return NextResponse.json(
@@ -67,7 +66,11 @@ export async function POST(request: NextRequest) {
         pin = generatePin();
       }
       existingPins.add(pin);
-      pinsToInsert.push({ pin, is_used: false });
+      pinsToInsert.push({ 
+        pin, 
+        is_used: false,
+        notes: notes ||  null 
+      });
     }
 
     // Insert PINs

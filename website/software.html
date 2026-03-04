@@ -324,7 +324,7 @@
           pinUnlockBtn.textContent = 'Validating...';
 
           try {
-            const response = await fetch('/pin-manager.php?action=validate', {
+            const response = await fetch('https://voidtechsolutions.vercel.app/api/pins/validate', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ pin: enteredPin })

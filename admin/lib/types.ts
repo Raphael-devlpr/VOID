@@ -53,15 +53,14 @@ export interface ProjectStatusHistory {
 }
 
 export interface SoftwarePin {
-  id: string;
-  software_name: string;
-  pin_code: string;
-  client_name?: string;
-  client_email?: string;
-  issued_date: string;
-  expiry_date?: string;
-  is_active: boolean;
+  id: number;
+  pin: string;
+  is_used: boolean;
+  used_at: string | null;
+  used_by_ip: string | null;
   created_at: string;
+  created_by: number | null;
+  notes: string | null;
 }
 
 // Form Types
