@@ -48,18 +48,18 @@ export async function loginAdmin(email: string, password: string): Promise<{ suc
   try {
     console.log('🔍 Login attempt for:', email);
     
-    // Get admin from database
+    // Get admin from database - check both email and name fields
     const { data: admin, error } = await supabase
       .from('admins')
       .select('*')
-      .eq('email', email)
+      .or(`email.eq.${email},name.eq.${email}`)
       .single();
 
     console.log('📊 Database response:', { admin: admin ? 'found' : 'not found', error });
 
     if (error || !admin) {
       console.log('❌ Admin not found in database');
-      return { success: false, error: 'Invalid email or password' };
+      return { success: false, error: 'Invalid username/email or password' };
     }
 
     console.log('🔐 Comparing password...');
@@ -73,7 +73,7 @@ export async function loginAdmin(email: string, password: string): Promise<{ suc
     
     if (!isValid) {
       console.log('❌ Password does not match');
-      return { success: false, error: 'Invalid email or password' };
+      return { success: false, error: 'Invalid username/email or password' };
     }
 
     // Create session

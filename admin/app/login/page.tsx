@@ -67,9 +67,9 @@ export default function LoginPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              label="Email"
-              type="email"
-              placeholder="admin@voidtechsolutions.co.za"
+              label="Username or Email"
+              type="text"
+              placeholder="admin"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -87,7 +87,7 @@ export default function LoginPage() {
             </Button>
           </form>
           <div className="mt-6 text-center text-xs sm:text-sm text-gray-500 border-t border-gray-200 pt-4">
-          
+            <p>Need help? Contact <a href="mailto:info@voidtechsolutions.co.za" className="text-blue-600 hover:underline">info@voidtechsolutions.co.za</a></p>
           </div>
         </CardContent>
       </Card>
