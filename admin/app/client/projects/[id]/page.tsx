@@ -10,6 +10,8 @@ import { Input } from '@/components/ui/Input';
 import { LogOut, ArrowLeft, Calendar, Globe, MessageSquare, History } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { formatDate } from '@/lib/utils';
+import { ClientProjectMeetings } from '@/components/ClientProjectMeetings';
+import { ClientProjectFiles } from '@/components/ClientProjectFiles';
 
 export default function ClientProjectPage() {
   const router = useRouter();
@@ -235,6 +237,12 @@ export default function ClientProjectPage() {
               )}
             </CardContent>
           </Card>
+
+          {/* Meetings & Calls */}
+          <ClientProjectMeetings projectId={projectId} />
+
+          {/* Project Files */}
+          <ClientProjectFiles projectId={projectId} />
         </div>
 
         {/* Notes Section */}

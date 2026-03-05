@@ -10,6 +10,8 @@ import { Badge } from '@/components/ui/Badge';
 import { ArrowLeft, Trash2, MessageSquare } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { formatDate } from '@/lib/utils';
+import { ProjectMeetings } from '@/components/ProjectMeetings';
+import { ProjectFiles } from '@/components/ProjectFiles';
 
 export default function EditProjectPage() {
   const router = useRouter();
@@ -341,6 +343,12 @@ export default function EditProjectPage() {
               )}
             </CardContent>
           </Card>
+
+          {/* Project Meetings */}
+          <ProjectMeetings projectId={projectId} />
+
+          {/* Project Files */}
+          <ProjectFiles projectId={projectId} />
         </div>
       </main>
     </div>
