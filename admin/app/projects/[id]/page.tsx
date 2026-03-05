@@ -277,7 +277,7 @@ export default function EditProjectPage() {
 
           {/* Status History */}
           {history.length > 0 && (
-            <Card>
+            <Card className="w-full max-w-full">
               <CardHeader>
                 <CardTitle>Status History</CardTitle>
               </CardHeader>
@@ -300,7 +300,7 @@ export default function EditProjectPage() {
           )}
 
           {/* Client Messages/Notes */}
-          <Card>
+          <Card className="w-full max-w-full">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2">

@@ -91,7 +91,7 @@ export function ClientProjectMeetings({ projectId }: { projectId: string }) {
 
   if (isLoading) {
     return (
-      <Card>
+      <Card className="w-full max-w-full">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Calendar className="h-5 w-5 text-blue-600" />
@@ -108,9 +108,9 @@ export function ClientProjectMeetings({ projectId }: { projectId: string }) {
   }
 
   return (
-    <Card>
+    <Card className="w-full max-w-full">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+        <CardTitle className="flex items-center gap-2 break-words">
           <Calendar className="h-5 w-5 text-blue-600" />
           Meetings & Calls
           {meetings.length > 0 && (

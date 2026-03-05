@@ -174,7 +174,7 @@ export function ProjectMeetings({ projectId }: { projectId: string }) {
 
   if (isLoading) {
     return (
-      <Card>
+      <Card className="w-full max-w-full">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Calendar className="h-5 w-5" />
@@ -191,10 +191,10 @@ export function ProjectMeetings({ projectId }: { projectId: string }) {
   }
 
   return (
-    <Card>
+    <Card className="w-full max-w-full">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 break-words">
             <Calendar className="h-5 w-5" />
             Meetings
             {meetings.length > 0 && (

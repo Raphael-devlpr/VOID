@@ -148,7 +148,7 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
 
   if (isLoading) {
     return (
-      <Card>
+      <Card className="w-full max-w-full">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5 text-green-600" />
@@ -165,10 +165,10 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
   }
 
   return (
-    <Card>
+    <Card className="w-full max-w-full">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 break-words">
             <FileText className="h-5 w-5 text-green-600" />
             Project Files
             {files.length > 0 && (
@@ -319,11 +319,11 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         {getFileIcon(file.file_name)}
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 truncate">
+                          <p className="text-sm font-medium text-gray-900 break-words">
                             {file.file_name}
                           </p>
                           {file.description && (
-                            <p className="text-xs text-gray-600 truncate">{file.description}</p>
+                            <p className="text-xs text-gray-600 break-words">{file.description}</p>
                           )}
                           <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
                             <span>{formatFileSize(file.file_size)}</span>

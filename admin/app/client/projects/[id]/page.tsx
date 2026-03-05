@@ -180,7 +180,7 @@ export default function ClientProjectPage() {
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Project Info */}
-          <Card>
+          <Card className="w-full max-w-full">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-blue-600" />
@@ -208,7 +208,7 @@ export default function ClientProjectPage() {
           </Card>
 
           {/* Status History */}
-          <Card>
+          <Card className="w-full max-w-full">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <History className="h-5 w-5 text-purple-600" />
@@ -246,7 +246,7 @@ export default function ClientProjectPage() {
         </div>
 
         {/* Notes Section */}
-        <Card className="mt-6">
+        <Card className="mt-6 w-full max-w-full">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MessageSquare className="h-5 w-5 text-green-600" />
