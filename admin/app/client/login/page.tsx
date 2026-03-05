@@ -58,14 +58,14 @@ export default function ClientLoginPage() {
               priority
             />
           </div>
-           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Client Portal</h1>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Client Portal</h1>
+           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Void Tech Solutions</h1>
+          <h6 className="text-lg sm:text-xl font-semibold text-gray-700">Client Portal</h6>
          
         </div>
         <Card className="w-full">
           <CardHeader>
-            <CardTitle className="text-xl sm:text-2xl">Welcome Back</CardTitle>
-            <CardDescription>Login to view your project status</CardDescription>
+            <CardTitle className="text-xl sm:text-2xl text-center">Welcome Back</CardTitle>
+            <CardDescription className="text-center">Login to view your project status</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -98,6 +98,8 @@ export default function ClientLoginPage() {
                 <ArrowLeft className="h-4 w-4" />
                 Back to Main Website
               </Link>
+
+                 <p className="mt-2 text-sm text-gray-600">Need help? Contact <a href="mailto:admin@voidtechsolutions.co.za" className="text-blue-600 hover:underline">admin@voidtechsolutions.co.za</a></p>
             </div>
           </CardContent>
         </Card>

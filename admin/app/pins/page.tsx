@@ -30,6 +30,11 @@ export default function PinsPage() {
       const response = await fetch('/api/auth/check');
       if (!response.ok) {
         router.push('/login');
+        return;
+      }
+      const data = await response.json();
+      if (data.admin?.name) {
+        setAdminName(data.admin.name);
       }
     } catch (error) {
       router.push('/login');
