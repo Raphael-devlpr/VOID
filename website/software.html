@@ -329,7 +329,7 @@
           try {
             // For local development use: http://localhost:3000/api/pins/validate
             // For production use: https://voidtechsolutions.vercel.app/api/pins/validate
-            const response = await fetch('https://voidtechsolutions.vercel.app/api/pins/validate', {
+            const response = await fetch('http://localhost:3000/api/pins/validate', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ pin: enteredPin })

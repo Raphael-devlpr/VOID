@@ -4,11 +4,12 @@ import { requireClientAuth } from '@/lib/clientAuth';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await requireClientAuth();
-    const projectId = params.id;
+    const { id } = await context.params;
+    const projectId = id;
 
     // Verify the client owns this project
     const { data: project, error: projectError } = await supabase
