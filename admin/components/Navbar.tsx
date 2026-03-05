@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { LayoutDashboard, FolderOpen, Key, LogOut, Menu, X, Users } from 'lucide-react';
@@ -29,8 +30,15 @@ export function Navbar({ adminName }: { adminName: string }) {
         <div className="flex h-16 justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/dashboard" className="text-lg sm:text-xl font-bold text-blue-600">
-              VOID Admin
+            <Link href="/dashboard" className="flex items-center gap-2">
+              <Image 
+                src="/logo.png" 
+                alt="VOID Tech Solutions Logo" 
+                width={40} 
+                height={40}
+                className="object-contain"
+              />
+              <span className="text-lg sm:text-xl font-bold text-blue-600">VOID Admin</span>
             </Link>
           </div>
 

@@ -1,6 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 
+// CORS headers for local development
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
+// Handle OPTIONS request for CORS preflight
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: corsHeaders });
+}
+
 // POST /api/pins/validate - Validate a PIN (public endpoint for software page)
 export async function POST(request: NextRequest) {
   try {
@@ -10,7 +22,7 @@ export async function POST(request: NextRequest) {
     if (!pin || pin.trim().length === 0) {
       return NextResponse.json(
         { success: false, message: 'PIN is required' },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       );
     }
 
@@ -24,7 +36,7 @@ export async function POST(request: NextRequest) {
     if (error || !data) {
       return NextResponse.json(
         { success: false, message: 'Incorrect PIN. Please try again.' },
-        { status: 401 }
+        { status: 401, headers: corsHeaders }
       );
     }
 
@@ -32,7 +44,7 @@ export async function POST(request: NextRequest) {
     if (data.is_used) {
       return NextResponse.json(
         { success: false, message: 'This PIN has already been used. Please request a new PIN.' },
-        { status: 403 }
+        { status: 403, headers: corsHeaders }
       );
     }
 
@@ -52,12 +64,15 @@ export async function POST(request: NextRequest) {
 
     if (updateError) throw updateError;
 
-    return NextResponse.json({ success: true, message: 'PIN valid' });
+    return NextResponse.json(
+      { success: true, message: 'PIN valid' },
+      { headers: corsHeaders }
+    );
   } catch (error) {
     console.error('Error validating PIN:', error);
     return NextResponse.json(
       { success: false, message: 'Server error. Please try again.' },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     );
   }
 }

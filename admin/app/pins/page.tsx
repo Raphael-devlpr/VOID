@@ -7,9 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
-import { Plus, Copy, Check } from 'lucide-react';
+import { Plus, Copy, Check, Trash2 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
-import { formatDate } from '@/lib/utils';
+import { formatDate, formatDateTime } from '@/lib/utils';
 
 export default function PinsPage() {
   const router = useRouter();
@@ -17,8 +17,9 @@ export default function PinsPage() {
   const [pins, setPins] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [pinCount, setPinCount] = useState(5);
+  const [pinCount, setPinCount] = useState(1);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     checkAuth();
@@ -88,6 +89,32 @@ export default function PinsPage() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+  const handleDeletePin = async (pinId: string) => {
+    if (!confirm('Are you sure you want to delete this PIN?')) {
+      return;
+    }
+
+    setDeletingId(pinId);
+
+    try {
+      const response = await fetch(`/api/pins/${pinId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        toast.success('PIN deleted successfully!');
+        fetchPins();
+      } else {
+        const data = await response.json();
+        toast.error(data.error || 'Failed to delete PIN');
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   const stats = {
     total: pins.length,
     used: pins.filter(p => p.is_used).length,
@@ -97,7 +124,6 @@ export default function PinsPage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
-        <Navbar adminName={adminName} />
         <div className="text-center">
           <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
           <p className="mt-4 text-gray-700 font-medium">Loading PINs...</p>
@@ -113,8 +139,8 @@ export default function PinsPage() {
       
       <main className="mx-auto max-w-7xl px-4 py-6 sm:py-8 sm:px-6 lg:px-8">
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">Software PIN Manager</h1>
-          <p className="mt-1 sm:mt-2 text-base sm:text-lg text-gray-600">Generate and manage software activation PINs 🔑</p>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">PIN Manager</h1>
+          <p className="mt-1 sm:mt-2 text-base sm:text-lg text-gray-600">Software activation PINs 🔑</p>
         </div>
 
         {/* Stats */}
@@ -228,24 +254,35 @@ export default function PinsPage() {
                           {pin.used_by_ip || 'N/A'}
                         </td>
                         <td className="px-6 py-5 text-sm text-gray-600">
-                          {pin.used_at ? formatDate(pin.used_at) : 'N/A'}
+                          {pin.used_at ? formatDateTime(pin.used_at) : 'N/A'}
                         </td>
                         <td className="px-6 py-5 text-sm text-gray-600">
                           {formatDate(pin.created_at)}
                         </td>
                         <td className="px-6 py-5 text-right">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => copyToClipboard(pin.pin, pin.id)}
-                            className="hover:bg-blue-50 hover:text-blue-600"
-                          >
-                            {copiedId === pin.id ? (
-                              <Check className="h-4 w-4 text-green-600" />
-                            ) : (
-                              <Copy className="h-4 w-4" />
-                            )}
-                          </Button>
+                          <div className="flex items-center justify-end gap-2">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyToClipboard(pin.pin, pin.id)}
+                              className="hover:bg-blue-50 hover:text-blue-600"
+                            >
+                              {copiedId === pin.id ? (
+                                <Check className="h-4 w-4 text-green-600" />
+                              ) : (
+                                <Copy className="h-4 w-4" />
+                              )}
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleDeletePin(pin.id)}
+                              className="hover:bg-red-50 hover:text-red-600"
+                              disabled={deletingId === pin.id}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
                         </td>
                       </tr>
                     ))}

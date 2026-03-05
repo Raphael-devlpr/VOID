@@ -161,7 +161,7 @@ export default function ClientDashboardPage() {
                   </div>
                   <Link href={`/client/projects/${project.id}`}>
                     <Button className="w-full gap-2">
-                      View Details
+                      View 
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>

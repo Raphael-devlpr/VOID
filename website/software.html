@@ -286,6 +286,9 @@
         <input type="password" id="pinInput" placeholder="Enter PIN" autocomplete="off" />
         <button class="theme-btn" id="pinUnlockBtn">Unlock Page</button>
         <div class="pin-error" id="pinError">Incorrect PIN. Please try again.</div>
+        <br> <br>
+         <p className="mt-2 text-sm text-gray-600">Need help? <br>Contact: <a href="mailto:admin@voidtechsolutions.co.za" className="text-blue-600 hover:underline">admin@voidtechsolutions.co.za</a></p>
+            </div>
       </div>
     </div>
 
@@ -335,10 +338,52 @@
             const result = await response.json();
 
             if (result.success) {
+              // Show success message
               pinError.style.display = 'none';
-              pinOverlay.style.display = 'none';
-              document.body.style.overflow = 'auto';
-              pinInput.value = '';
+              const successMsg = document.createElement('div');
+              successMsg.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                color: white;
+                padding: 30px 50px;
+                border-radius: 16px;
+                font-size: 20px;
+                font-weight: 600;
+                z-index: 10001;
+                box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4);
+                animation: successPulse 0.5s ease-in-out;
+              `;
+              successMsg.innerHTML = '✓ Access Granted!';
+              document.body.appendChild(successMsg);
+
+              // Add animation keyframes
+              if (!document.getElementById('success-animation')) {
+                const style = document.createElement('style');
+                style.id = 'success-animation';
+                style.textContent = `
+                  @keyframes successPulse {
+                    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+                    50% { transform: translate(-50%, -50%) scale(1.05); }
+                    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                  }
+                `;
+                document.head.appendChild(style);
+              }
+
+              // Hide overlay after showing success message
+              setTimeout(() => {
+                successMsg.style.transition = 'opacity 0.3s ease';
+                successMsg.style.opacity = '0';
+                setTimeout(() => {
+                  successMsg.remove();
+                  pinOverlay.style.display = 'none';
+                  document.body.style.overflow = 'auto';
+                  pinInput.value = '';
+                }, 300);
+              }, 1500);
             } else {
               showPinError(result.message);
               pinInput.value = '';
