@@ -176,9 +176,9 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
             )}
           </CardTitle>
           {!showUploadForm && (
-            <Button size="sm" onClick={() => setShowUploadForm(true)}>
-              <Upload className="h-4 w-4 mr-2" />
-              Upload File
+            <Button size="sm" onClick={() => setShowUploadForm(true)} className="h-8 sm:h-9">
+              <Upload className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Upload File</span>
             </Button>
           )}
         </div>
@@ -262,18 +262,18 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
                   {adminFiles.map((file) => (
                     <div
                       key={file.id}
-                      className="flex items-center justify-between p-3 border border-purple-200 bg-purple-50 rounded-lg hover:shadow-sm transition-shadow"
+                      className="flex items-start sm:items-center gap-2 p-3 border border-purple-200 bg-purple-50 rounded-lg hover:shadow-sm transition-shadow"
                     >
-                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                         {getFileIcon(file.file_name)}
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 truncate">
+                          <p className="text-sm font-medium text-gray-900 break-words">
                             {file.file_name}
                           </p>
                           {file.description && (
-                            <p className="text-xs text-gray-600 truncate">{file.description}</p>
+                            <p className="text-xs text-gray-600 break-words">{file.description}</p>
                           )}
-                          <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
+                          <div className="flex items-center gap-2 text-xs text-gray-500 mt-1 flex-wrap">
                             <Badge className={getFileTypeBadgeColor(file.file_type, file.uploaded_by)}>
                               {getFileTypeLabel(file.file_type)}
                             </Badge>
@@ -289,10 +289,11 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
                         target="_blank"
                         rel="noopener noreferrer"
                         download
+                        className="shrink-0"
                       >
-                        <Button size="sm" className="ml-4 bg-purple-600 hover:bg-purple-700">
-                          <Download className="h-4 w-4 mr-1" />
-                          Download
+                        <Button size="sm" className="bg-purple-600 hover:bg-purple-700 h-8 sm:h-9 px-2 sm:px-3">
+                          <Download className="h-4 w-4 sm:mr-1" />
+                          <span className="hidden sm:inline">Download</span>
                         </Button>
                       </a>
                     </div>
@@ -314,9 +315,9 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
                   {clientFiles.map((file) => (
                     <div
                       key={file.id}
-                      className="flex items-center justify-between p-3 border border-blue-200 bg-blue-50 rounded-lg hover:shadow-sm transition-shadow"
+                      className="flex items-start sm:items-center gap-2 p-3 border border-blue-200 bg-blue-50 rounded-lg hover:shadow-sm transition-shadow"
                     >
-                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                         {getFileIcon(file.file_name)}
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-gray-900 break-words">
@@ -337,8 +338,9 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
                         target="_blank"
                         rel="noopener noreferrer"
                         download
+                        className="shrink-0"
                       >
-                        <Button size="sm" variant="ghost" className="ml-4">
+                        <Button size="sm" variant="ghost" className="h-8 w-8 sm:h-9 sm:w-9 p-0">
                           <Download className="h-4 w-4" />
                         </Button>
                       </a>

@@ -61,7 +61,14 @@ export async function POST(
     });
 
     if (!uploadResponse.ok) {
-      const errorData = await uploadResponse.json();
+      const errorText = await uploadResponse.text();
+      console.error('PHP upload failed:', errorText);
+      let errorData;
+      try {
+        errorData = JSON.parse(errorText);
+      } catch (e) {
+        errorData = { error: 'Upload failed: ' + errorText.substring(0, 100) };
+      }
       return NextResponse.json(
         { error: errorData.error || 'Failed to upload file' },
         { status: uploadResponse.status }
@@ -71,22 +78,26 @@ export async function POST(
     const uploadResult = await uploadResponse.json();
 
     // Save file metadata to database
+    // Note: uploaded_by_id is set to null for clients since client IDs are integers, not UUIDs
     const { data: fileRecord, error: dbError } = await supabase
       .from('project_files')
       .insert({
-        project_id: id,
+        project_id: parseInt(id),
         file_name: file.name,
         file_url: uploadResult.file_url,
         file_type: 'client-upload',
         file_size: file.size,
         uploaded_by: 'client',
-        uploaded_by_id: session.id,
+        uploaded_by_id: null, // Client IDs are integers, not UUIDs
         description,
       })
       .select()
       .single();
 
-    if (dbError) throw dbError;
+    if (dbError) {
+      console.error('Database error saving file metadata:', dbError);
+      throw dbError;
+    }
 
     return NextResponse.json({ file: fileRecord }, { status: 201 });
   } catch (error) {

@@ -200,9 +200,9 @@ export function ProjectFiles({ projectId }: { projectId: string }) {
             )}
           </CardTitle>
           {!showUploadForm && (
-            <Button size="sm" onClick={() => setShowUploadForm(true)}>
-              <Upload className="h-4 w-4 mr-2" />
-              Upload File
+            <Button size="sm" onClick={() => setShowUploadForm(true)} className="h-8 sm:h-9">
+              <Upload className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Upload File</span>
             </Button>
           )}
         </div>
@@ -289,9 +289,9 @@ export function ProjectFiles({ projectId }: { projectId: string }) {
                   {typeFiles.map((file) => (
                     <div
                       key={file.id}
-                      className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="flex items-start sm:items-center gap-2 sm:gap-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                     >
-                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
                         {getFileIcon(file.file_name)}
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-gray-900 break-words">
@@ -309,14 +309,14 @@ export function ProjectFiles({ projectId }: { projectId: string }) {
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 ml-4">
+                      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
                         <a
                           href={file.file_url}
                           target="_blank"
                           rel="noopener noreferrer"
                           download
                         >
-                          <Button size="sm" variant="ghost">
+                          <Button size="sm" variant="ghost" className="h-8 w-8 sm:h-9 sm:w-9 p-0">
                             <Download className="h-4 w-4" />
                           </Button>
                         </a>
@@ -324,7 +324,7 @@ export function ProjectFiles({ projectId }: { projectId: string }) {
                           size="sm"
                           variant="ghost"
                           onClick={() => handleDelete(file.id)}
-                          className="hover:bg-red-50 hover:text-red-600"
+                          className="hover:bg-red-50 hover:text-red-600 h-8 w-8 sm:h-9 sm:w-9 p-0"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
