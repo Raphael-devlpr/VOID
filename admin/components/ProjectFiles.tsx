@@ -98,6 +98,38 @@ export function ProjectFiles({ projectId }: { projectId: string }) {
     }
   };
 
+  const handleDownload = async (fileId: string, fileName: string) => {
+    try {
+      const response = await fetch(`/api/files/${fileId}/download`);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(errorData.details || errorData.error || 'Failed to download file');
+        console.error('Download error:', errorData);
+        return;
+      }
+
+      // If the response is a redirect, open it in a new tab
+      if (response.redirected) {
+        window.open(response.url, '_blank');
+      } else {
+        // Handle direct file download
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      }
+    } catch (error) {
+      console.error('Download error:', error);
+      toast.error('An error occurred while downloading the file');
+    }
+  };
+
   const handleDelete = async (fileId: string) => {
     if (!confirm('Delete this file?')) return;
 
@@ -310,21 +342,21 @@ export function ProjectFiles({ projectId }: { projectId: string }) {
                         </div>
                       </div>
                       <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-                        <a
-                          href={file.file_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          download
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-8 w-8 sm:h-9 sm:w-9 p-0"
+                          onClick={() => handleDownload(file.id, file.file_name)}
+                          title="Download file"
                         >
-                          <Button size="sm" variant="ghost" className="h-8 w-8 sm:h-9 sm:w-9 p-0">
-                            <Download className="h-4 w-4" />
-                          </Button>
-                        </a>
+                          <Download className="h-4 w-4" />
+                        </Button>
                         <Button
                           size="sm"
                           variant="ghost"
                           onClick={() => handleDelete(file.id)}
                           className="hover:bg-red-50 hover:text-red-600 h-8 w-8 sm:h-9 sm:w-9 p-0"
+                          title="Delete file"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
