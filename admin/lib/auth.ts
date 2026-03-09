@@ -46,8 +46,6 @@ export async function destroySession(): Promise<void> {
 // Login admin
 export async function loginAdmin(email: string, password: string): Promise<{ success: boolean; error?: string; session?: AuthSession }> {
   try {
-    console.log('🔍 Login attempt for:', email);
-    
     // Get admin from database - check both email and name fields
     // Try to find by email first, then by name
     let { data: admin, error } = await supabase
@@ -67,24 +65,14 @@ export async function loginAdmin(email: string, password: string): Promise<{ suc
       error = result.error;
     }
 
-    console.log('📊 Database response:', { admin: admin ? 'found' : 'not found', error });
-
     if (error || !admin) {
-      console.log('❌ Admin not found in database');
       return { success: false, error: 'Invalid username/email or password' };
     }
-
-    console.log('🔐 Comparing password...');
-    console.log('Password from input:', password);
-    console.log('Hash from database:', admin.password_hash);
     
     // Verify password
     const isValid = await bcrypt.compare(password, admin.password_hash);
     
-    console.log('✅ Password match result:', isValid);
-    
     if (!isValid) {
-      console.log('❌ Password does not match');
       return { success: false, error: 'Invalid username/email or password' };
     }
 

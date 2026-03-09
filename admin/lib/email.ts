@@ -27,15 +27,6 @@ export async function sendEmail({ to, subject, html, text }: EmailOptions) {
       return { success: false, error: 'Email not configured' };
     }
 
-    console.log('📧 Sending email to:', to);
-    console.log('📬 Subject:', subject);
-    console.log('🔧 SMTP Config:', {
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      user: process.env.SMTP_USER,
-      passwordSet: !!process.env.SMTP_PASSWORD,
-    });
-
     const info = await transporter.sendMail({
       from: `"VOID Tech Solutions" <${process.env.SMTP_USER || 'info@voidtechsolutions.co.za'}>`,
       to,
@@ -44,30 +35,10 @@ export async function sendEmail({ to, subject, html, text }: EmailOptions) {
       html,
     });
 
-    console.log('✅ Email sent successfully!');
-    console.log('   → To:', to);
-    console.log('   → Message ID:', info.messageId);
-    console.log('   → Response:', info.response);
+    console.log('✅ Email sent to:', to);
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('❌ Email error:', error);
-    if (error instanceof Error) {
-      console.error('   → Error message:', error.message);
-      console.error('   → Error stack:', error.stack);
-    }
-    return { success: false, error: String(error) };
-  }
-}
-
-// Test SMTP connection
-export async function testEmailConnection() {
-  try {
-    console.log('🔍 Testing SMTP connection...');
-    await transporter.verify();
-    console.log('✅ SMTP connection successful!');
-    return { success: true };
-  } catch (error) {
-    console.error('❌ SMTP connection failed:', error);
+    console.error('❌ Email send failed:', error);
     return { success: false, error: String(error) };
   }
 }
