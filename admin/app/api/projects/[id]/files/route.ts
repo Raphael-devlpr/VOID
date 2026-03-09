@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { requireAuth } from '@/lib/auth';
+import { sendEmail, newFileUploadedEmail } from '@/lib/email';
 
 // GET /api/projects/[id]/files - Get all files for a project
 export async function GET(
@@ -110,6 +111,32 @@ export async function POST(
     if (dbError) {
       console.error('Database error saving file metadata:', dbError);
       throw dbError;
+    }
+
+    // Get project and client info for email notification
+    const { data: project } = await supabase
+      .from('projects')
+      .select('project_name, client_name, client_email')
+      .eq('id', id)
+      .single();
+
+    // Send email notification to client
+    if (project && project.client_email) {
+      const portalUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://voidtechsolutions.vercel.app'}/client/projects/${id}`;
+      const emailTemplate = newFileUploadedEmail(
+        project.client_name,
+        project.project_name,
+        file.name,
+        fileType || 'document',
+        portalUrl
+      );
+      
+      // Send email (non-blocking)
+      sendEmail({
+        to: project.client_email,
+        subject: emailTemplate.subject,
+        html: emailTemplate.html,
+      }).catch(err => console.error('Failed to send file upload email:', err));
     }
 
     return NextResponse.json({ file: fileRecord }, { status: 201 });

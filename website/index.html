@@ -126,6 +126,27 @@
     <link rel="stylesheet" href="/assets/css/responsive.css">
     <!-- ========== End Stylesheet ========== -->
 
+    <!-- Client Portal Responsive Styles -->
+    <style>
+        @media (max-width: 768px) {
+            .client-portal-area {
+                padding: 40px 0 !important;
+            }
+            .client-portal-area .section-title {
+                font-size: 1.8rem !important;
+            }
+            .client-portal-area .portal-content > div:first-child {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+            .client-portal-area .portal-content > div:last-child a {
+                display: flex !important;
+                margin: 0 0 10px 0 !important;
+                justify-content: center;
+            }
+        }
+    </style>
+
 
 </head>
 
@@ -698,6 +719,53 @@
                                     </div>
 
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- Client Portal Section -->
+                <section class="client-portal-area" style="padding: 60px 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; overflow: hidden;">
+                    <div class="custom-container" style="position: relative; z-index: 2;">
+                        <div class="section-header text-center" style="margin-bottom: 40px;">
+                            <h5 class="section-subtitle" style="color: rgba(255,255,255,0.9); margin-bottom: 10px;">Stay Updated On Your Project</h5>
+                            <h1 class="section-title" style="color: white; font-size: 2.5rem; margin-bottom: 15px;">Client Portal</h1>
+                            <p style="color: rgba(255,255,255,0.95); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Track project progress, access files, and communicate with our team — all in one place.</p>
+                        </div>
+
+                        <div class="portal-content" style="max-width: 900px; margin: 0 auto;">
+                            <!-- Features Grid -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px;">
+                                <div style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); text-align: center;">
+                                    <i class="las la-chart-line" style="font-size: 2.5rem; color: white; margin-bottom: 10px; display: block;"></i>
+                                    <h4 style="color: white; margin-bottom: 8px; font-size: 1.1rem;">Live Tracking</h4>
+                                    <p style="color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.5;">Monitor your project status in real-time</p>
+                                </div>
+
+                                <div style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); text-align: center;">
+                                    <i class="las la-file-download" style="font-size: 2.5rem; color: white; margin-bottom: 10px; display: block;"></i>
+                                    <h4 style="color: white; margin-bottom: 8px; font-size: 1.1rem;">File Access</h4>
+                                    <p style="color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.5;">Download/Upload files & invoices</p>
+                                </div>
+
+                                <div style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); text-align: center;">
+                                    <i class="las la-bell" style="font-size: 2.5rem; color: white; margin-bottom: 10px; display: block;"></i>
+                                    <h4 style="color: white; margin-bottom: 8px; font-size: 1.1rem;">Instant Alerts</h4>
+                                    <p style="color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.5;">Get email notifications on updates</p>
+                                </div>
+                            </div>
+
+                            <!-- CTA Buttons -->
+                            <div style="text-align: center;">
+                                <a href="https://voidtechsolutions.vercel.app/client/login" target="_blank" class="theme-btn" style="background: white; color: #667eea; padding: 15px 35px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-right: 15px;">
+                                    <i class="las la-sign-in-alt"></i>
+                                    Access Portal
+                                </a>
+                                <a href="#contact-section" style="color: white; text-decoration: none; font-weight: 600; padding: 15px 25px; border: 2px solid white; border-radius: 8px; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s;">
+                                    Request Access
+                                    <i class="las la-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { supabase } from '@/lib/supabase';
+import { sendEmail, newProjectAssignedEmail } from '@/lib/email';
 
 // GET all projects
 export async function GET(request: NextRequest) {
@@ -86,6 +87,24 @@ export async function POST(request: NextRequest) {
       status: project.status,
       note: 'Project created',
     });
+
+    // Send email notification to client about new project
+    if (client_email) {
+      const portalUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://voidtechsolutions.vercel.app'}/client/projects/${project.id}`;
+      const emailTemplate = newProjectAssignedEmail(
+        client_name,
+        project_name,
+        notes || `We're excited to work on your ${project_type} project!`,
+        portalUrl
+      );
+      
+      // Send email (non-blocking)
+      sendEmail({
+        to: client_email,
+        subject: emailTemplate.subject,
+        html: emailTemplate.html,
+      }).catch(err => console.error('Failed to send new project email:', err));
+    }
 
     return NextResponse.json({ project }, { status: 201 });
   } catch (error) {

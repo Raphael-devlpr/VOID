@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { requireAuth } from '@/lib/auth';
+import { sendEmail, newMeetingScheduledEmail } from '@/lib/email';
 
 // GET /api/projects/[id]/meetings - Get all meetings for a project
 export async function GET(
@@ -69,6 +70,34 @@ export async function POST(
       .single();
 
     if (error) throw error;
+
+    // Get project and client info for email notification
+    const { data: project } = await supabase
+      .from('projects')
+      .select('project_name, client_name, client_email')
+      .eq('id', id)
+      .single();
+
+    // Send email notification to client
+    if (project && project.client_email) {
+      const portalUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://voidtechsolutions.vercel.app'}/client/projects/${id}`;
+      const emailTemplate = newMeetingScheduledEmail(
+        project.client_name,
+        project.project_name,
+        title,
+        meeting_date,
+        meeting_type || 'online',
+        meeting_link,
+        portalUrl
+      );
+      
+      // Send email (non-blocking)
+      sendEmail({
+        to: project.client_email,
+        subject: emailTemplate.subject,
+        html: emailTemplate.html,
+      }).catch(err => console.error('Failed to send meeting scheduled email:', err));
+    }
 
     return NextResponse.json({ meeting }, { status: 201 });
   } catch (error) {

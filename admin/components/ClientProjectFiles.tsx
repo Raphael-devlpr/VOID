@@ -275,7 +275,7 @@ export function ClientProjectFiles({ projectId }: { projectId: string }) {
             {!showUploadForm && (
               <Button size="sm" onClick={() => setShowUploadForm(true)}>
                 <Upload className="h-4 w-4 mr-2" />
-                Upload First File
+                Upload File
               </Button>
             )}
           </div>

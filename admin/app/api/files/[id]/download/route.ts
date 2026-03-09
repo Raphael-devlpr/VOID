@@ -38,13 +38,11 @@ export async function GET(
       }
     }
 
-    // Validate file URL exists by making a HEAD request
+    // Fetch the file from the external URL
     try {
-      const headResponse = await fetch(fileRecord.file_url, {
-        method: 'HEAD',
-      });
+      const fileResponse = await fetch(fileRecord.file_url);
 
-      if (!headResponse.ok) {
+      if (!fileResponse.ok) {
         console.error(`File not found on server: ${fileRecord.file_url}`);
         return NextResponse.json(
           { 
@@ -57,14 +55,25 @@ export async function GET(
         );
       }
 
-      // Redirect to the actual file URL for download
-      return NextResponse.redirect(fileRecord.file_url);
+      // Get the file content as a blob
+      const fileBlob = await fileResponse.blob();
+      const fileBuffer = await fileBlob.arrayBuffer();
+
+      // Return the file with proper download headers
+      return new NextResponse(fileBuffer, {
+        status: 200,
+        headers: {
+          'Content-Type': fileRecord.file_type || fileResponse.headers.get('content-type') || 'application/octet-stream',
+          'Content-Disposition': `attachment; filename="${fileRecord.file_name}"`,
+          'Content-Length': fileBuffer.byteLength.toString(),
+        },
+      });
     } catch (fileCheckError) {
-      console.error('Error checking file existence:', fileCheckError);
+      console.error('Error downloading file:', fileCheckError);
       return NextResponse.json(
         {
           error: 'Unable to access file',
-          details: 'There was an error attempting to access the file on the server.',
+          details: 'There was an error attempting to download the file from the server.',
           fileName: fileRecord.file_name,
           fileUrl: fileRecord.file_url
         },

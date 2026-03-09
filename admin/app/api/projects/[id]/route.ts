@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
 import { supabase } from '@/lib/supabase';
+import { sendEmail, projectStatusChangeEmail } from '@/lib/email';
 
 /**
  * API Route: /api/projects/[id]
@@ -117,13 +118,32 @@ export async function PUT(
       return NextResponse.json({ error: 'Failed to update project' }, { status: 500 });
     }
 
-    // If status changed, add to history
+    // If status changed, add to history and send notification
     if (currentProject && currentProject.status !== status) {
       await supabase.from('project_status_history').insert({
         project_id: id,
         status,
         note: `Status changed from ${currentProject.status} to ${status}`,
       });
+
+      // Send email notification to client
+      if (client_email) {
+        const portalUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://voidtechsolutions.vercel.app'}/client/projects/${id}`;
+        const emailTemplate = projectStatusChangeEmail(
+          client_name,
+          project_name,
+          currentProject.status,
+          status,
+          portalUrl
+        );
+        
+        // Send email (non-blocking)
+        sendEmail({
+          to: client_email,
+          subject: emailTemplate.subject,
+          html: emailTemplate.html,
+        }).catch(err => console.error('Failed to send status change email:', err));
+      }
     }
 
     return NextResponse.json({ project }, { status: 200 });
