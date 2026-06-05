@@ -9,6 +9,11 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER || 'info@voidtechsolutions.co.za',
     pass: process.env.SMTP_PASSWORD || '',
   },
+  // Add connection timeout and debugging
+  connectionTimeout: 10000, // 10 seconds
+  greetingTimeout: 10000,
+  logger: true,
+  debug: process.env.NODE_ENV === 'development',
 });
 
 interface EmailOptions {
@@ -27,6 +32,16 @@ export async function sendEmail({ to, subject, html, text }: EmailOptions) {
       return { success: false, error: 'Email not configured' };
     }
 
+    // Log SMTP configuration (without password)
+    console.log('📧 SMTP Config:', {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      user: process.env.SMTP_USER,
+      hasPassword: !!process.env.SMTP_PASSWORD,
+    });
+
+    console.log('📤 Attempting to send email to:', to);
+
     const info = await transporter.sendMail({
       from: `"VOID Tech Solutions" <${process.env.SMTP_USER || 'info@voidtechsolutions.co.za'}>`,
       to,
@@ -35,10 +50,20 @@ export async function sendEmail({ to, subject, html, text }: EmailOptions) {
       html,
     });
 
-    console.log('✅ Email sent to:', to);
+    console.log('✅ Email sent successfully!', {
+      to,
+      messageId: info.messageId,
+      response: info.response,
+      accepted: info.accepted,
+      rejected: info.rejected,
+    });
     return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error('❌ Email send failed:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     return { success: false, error: String(error) };
   }
 }

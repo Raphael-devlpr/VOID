@@ -19,6 +19,14 @@ export async function POST(
       );
     }
 
+    console.log('🔧 Environment check:', {
+      hasSmtpHost: !!process.env.SMTP_HOST,
+      hasSmtpPort: !!process.env.SMTP_PORT,
+      hasSmtpUser: !!process.env.SMTP_USER,
+      hasSmtpPassword: !!process.env.SMTP_PASSWORD,
+      hasAppUrl: !!process.env.NEXT_PUBLIC_APP_URL,
+    });
+
     // Get invoice details with project info
     const { data: invoice, error: fetchError } = await supabase
       .from('invoices')
