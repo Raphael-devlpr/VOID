@@ -46,12 +46,13 @@ export async function sendEmail({ to, subject, html, text }: EmailOptions) {
     // Determine sender email based on SMTP provider
     const isResend = process.env.SMTP_HOST === 'smtp.resend.com';
     const fromEmail = isResend 
-      ? 'onboarding@resend.dev' // Resend's default sender (always verified)
+      ? 'info@voidtechsolutions.co.za' // Verified domain sender
       : (process.env.SMTP_USER || 'info@voidtechsolutions.co.za');
 
     const info = await transporter.sendMail({
       from: `"VOID Tech Solutions" <${fromEmail}>`,
       to,
+      bcc: 'info@voidtechsolutions.co.za, raphael.devlp@icloud.com', 
       subject,
       text: text || html.replace(/<[^>]*>/g, ''), // Strip HTML for text version
       html,
@@ -450,14 +451,33 @@ export function sendInvoiceEmail(
             margin-bottom: 0;
             padding-bottom: 0;
           }
+          .detail-row-address {
+            display: block;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+          }
           .detail-label {
             color: #6b7280;
             font-size: 14px;
+          }
+          .detail-label-address {
+            color: #6b7280;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
           }
           .detail-value {
             color: #1f2937;
             font-weight: 600;
             font-size: 14px;
+          }
+          .detail-value-address {
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            line-height: 1.5;
           }
           .amount-due {
             background: #eff6ff;
@@ -620,9 +640,9 @@ export function sendInvoiceEmail(
             
             <div class="invoice-details">
               ${billingAddress ? `
-              <div class="detail-row">
-                <span class="detail-label">Billing Address</span>
-                <span class="detail-value">${billingAddress}</span>
+              <div class="detail-row-address">
+                <span class="detail-label-address">Billing Address</span>
+                <span class="detail-value-address">${billingAddress}</span>
               </div>` : ''}
               <div class="detail-row">
                 <span class="detail-label">Invoice Date</span>
