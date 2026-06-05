@@ -314,3 +314,354 @@ export function newProjectAssignedEmail(
     `,
   };
 }
+
+export function sendInvoiceEmail(
+  clientName: string,
+  clientEmail: string,
+  invoiceNumber: string,
+  totalAmount: number,
+  balanceDue: number,
+  dueDate: string | null,
+  pdfUrl: string,
+  items: Array<{description: string; quantity: number; price: number; subtotal: number}>,
+  projectName?: string,
+  paymentReference?: string,
+  billingAddress?: string
+) {
+  const subject = projectName 
+    ? `Invoice ${invoiceNumber} - ${projectName}`
+    : `Invoice ${invoiceNumber} from VOID Tech Solutions`;
+
+  return sendEmail({
+    to: clientEmail,
+    subject,
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6; 
+            color: #1f2937; 
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 0;
+          }
+          .container { 
+            max-width: 600px; 
+            margin: 40px auto; 
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+          }
+          .header { 
+            background: #ffffff;
+            padding: 32px 40px 24px;
+            border-bottom: 3px solid #6366f1;
+          }
+          .header-table {
+            width: 100%;
+          }
+          .header-left {
+            vertical-align: middle;
+          }
+          .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 16px;
+            vertical-align: middle;
+          }
+          .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+          }
+          .invoice-title {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+          .content { 
+            background: #ffffff;
+            padding: 32px 40px;
+          }
+          .greeting {
+            font-size: 16px;
+            color: #1f2937;
+            margin-bottom: 16px;
+          }
+          .intro-text {
+            color: #4b5563;
+            margin-bottom: 24px;
+          }
+          .invoice-details { 
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 6px;
+            margin: 24px 0;
+            border: 1px solid #e5e7eb;
+          }
+          .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e5e7eb;
+          }
+          .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+          }
+          .detail-label {
+            color: #6b7280;
+            font-size: 14px;
+          }
+          .detail-value {
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 14px;
+          }
+          .amount-due {
+            background: #eff6ff;
+            padding: 20px 24px;
+            border-radius: 6px;
+            margin: 24px 0;
+            border-left: 4px solid #3b82f6;
+          }
+          .amount-label {
+            color: #1e40af;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+          }
+          .amount-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e40af;
+          }
+          .project-info {
+            background: #eff6ff;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            border-left: 4px solid #3b82f6;
+          }
+          .project-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 4px;
+          }
+          .button { 
+            display: inline-block;
+            background: #6366f1;
+            color: #ffffff;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            margin: 8px 0 24px 0;
+          }
+          .button:hover {
+            background: #4f46e5;
+          }
+          .payment-info { 
+            background: #fef9e7;
+            padding: 24px;
+            border-radius: 6px;
+            margin: 24px 0;
+            border-left: 4px solid #f59e0b;
+          }
+          .payment-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #78350f;
+            margin: 0 0 16px 0;
+          }
+          .payment-row {
+            display: flex;
+            margin-bottom: 8px;
+            font-size: 14px;
+          }
+          .payment-label {
+            color: #92400e;
+            min-width: 140px;
+            font-weight: 500;
+          }
+          .payment-value {
+            color: #1f2937;
+            font-weight: 600;
+          }
+          .payment-reference {
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+            border: 1px dashed #f59e0b;
+          }
+          .reference-label {
+            color: #92400e;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+          }
+          .reference-value {
+            color: #1f2937;
+            font-size: 16px;
+            font-weight: 700;
+          }
+          .proof-section {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 24px;
+          }
+          .proof-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin: 0 0 12px 0;
+          }
+          .contact-item {
+            color: #4b5563;
+            font-size: 14px;
+            margin: 6px 0;
+          }
+          .footer { 
+            background: #f9fafb;
+            text-align: center;
+            padding: 24px 40px;
+            border-top: 1px solid #e5e7eb;
+          }
+          .footer-company {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+          }
+          .footer-text {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 4px 0;
+          }
+          .footer-link {
+            color: #6366f1;
+            text-decoration: none;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <table class="header-table" cellpadding="0" cellspacing="0">
+              <tr>
+                <td class="header-left">
+                  <img src="https://voidtechsolutions.co.za/assets/imgs/logo1.png" alt="VOID Logo" class="logo" />
+                </td>
+                <td class="header-left">
+                  <div class="logo-text">VOID Tech Solutions</div>
+                  <div class="invoice-title">Tax Invoice</div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="content">
+            <p class="greeting">Dear ${clientName},</p>
+            
+            <p class="intro-text">Thank you for your business. Please find your invoice details below.</p>
+            
+            ${projectName ? `
+            <div class="project-info">
+              <div class="project-name">Project: ${projectName}</div>
+            </div>
+            ` : ''}
+            
+            <div class="invoice-details">
+              ${billingAddress ? `
+              <div class="detail-row">
+                <span class="detail-label">Billing Address</span>
+                <span class="detail-value">${billingAddress}</span>
+              </div>` : ''}
+              <div class="detail-row">
+                <span class="detail-label">Invoice Date</span>
+                <span class="detail-value">${new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </div>
+              ${dueDate ? `
+              <div class="detail-row">
+                <span class="detail-label">Due Date</span>
+                <span class="detail-value">${new Date(dueDate).toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </div>` : ''}
+              <div class="detail-row">
+                <span class="detail-label">Total Amount</span>
+                <span class="detail-value">R ${totalAmount.toFixed(2)}</span>
+              </div>
+            </div>
+            
+            <div class="amount-due">
+              <div class="amount-label">Amount Due</div>
+              <div class="amount-value">R ${balanceDue.toFixed(2)}</div>
+            </div>
+            
+            <center>
+              <a href="${pdfUrl}" class="button">Download Invoice PDF</a>
+            </center>
+            
+            <div class="payment-info">
+              <h3 class="payment-title">Banking Details</h3>
+              <div class="payment-row">
+                <span class="payment-label">Bank Name</span>
+                <span class="payment-value">First National Bank (FNB)</span>
+              </div>
+              <div class="payment-row">
+                <span class="payment-label">Account Name</span>
+                <span class="payment-value">VOIDWEB (PTY) LTD</span>
+              </div>
+              <div class="payment-row">
+                <span class="payment-label">Account Number</span>
+                <span class="payment-value">63136565166</span>
+              </div>
+              <div class="payment-row">
+                <span class="payment-label">Branch Code</span>
+                <span class="payment-value">210835</span>
+              </div>
+              <div class="payment-row">
+                <span class="payment-label">Account Type</span>
+                <span class="payment-value">Gold Business Account</span>
+              </div>
+              
+              <div class="payment-reference">
+                <div class="reference-label">Payment Reference</div>
+                <div class="reference-value">${paymentReference || invoiceNumber}</div>
+              </div>
+            </div>
+            
+            <div class="proof-section">
+              <div class="proof-title">After Payment</div>
+              <div class="contact-item">📧 Email proof of payment to: <strong>info@voidtechsolutions.co.za</strong></div>
+              <div class="contact-item">📱 WhatsApp: <strong>+27 65 833 5278</strong></div>
+            </div>
+          </div>
+          
+          <div class="footer">
+            <div class="footer-company">VOID Tech Solutions</div>
+            <div class="footer-text">Registered: VOIDWEB (Pty) Ltd | Reg No: 2025/036371/07</div>
+            <div class="footer-text">Johannesburg, Gauteng, 1620 | South Africa</div>
+            <div class="footer-text">+27 65 833 5278 | info@voidtechsolutions.co.za</div>
+            <div class="footer-text"><a href="https://www.voidtechsolutions.co.za" class="footer-link">www.voidtechsolutions.co.za</a></div>
+          </div>
+        </div>
+      </body>
+      </html>
+    `,
+  });
+}

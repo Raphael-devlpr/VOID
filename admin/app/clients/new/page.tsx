@@ -20,6 +20,7 @@ export default function NewClientPage() {
     password: '',
     company: '',
     phone: '',
+    address: '',
   });
 
   useEffect(() => {
@@ -167,6 +168,20 @@ export default function NewClientPage() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
+                </div>
+
+                <div>
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                    Billing Address
+                  </label>
+                  <Input
+                    id="address"
+                    type="text"
+                    placeholder="123 Main Street, City, Province, Postal Code"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  />
+                  <p className="text-xs text-gray-500 mt-1">This address will be used for invoices</p>
                 </div>
               </div>
 

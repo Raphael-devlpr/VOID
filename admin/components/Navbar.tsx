@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { LayoutDashboard, FolderOpen, Key, LogOut, Menu, X, Users } from 'lucide-react';
+import { LayoutDashboard, FolderOpen, Key, LogOut, Menu, X, Users, FileText } from 'lucide-react';
 import { Button } from './ui/Button';
 
 export function Navbar({ adminName }: { adminName: string }) {
@@ -16,6 +16,7 @@ export function Navbar({ adminName }: { adminName: string }) {
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/projects', label: 'Projects', icon: FolderOpen },
     { href: '/clients', label: 'Clients', icon: Users },
+    { href: '/invoices', label: 'Invoices', icon: FileText },
     { href: '/pins', label: 'PINs', icon: Key },
   ];
 

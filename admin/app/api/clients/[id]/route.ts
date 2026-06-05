@@ -58,12 +58,13 @@ export async function PUT(
 
     const { id } = await context.params;
     const body = await request.json();
-    const { email, password, name, company, phone, is_active } = body;
+    const { email, password, name, company, phone, address, is_active } = body;
 
     const updateData: any = {
       name,
       company: company || null,
       phone: phone || null,
+      address: address || null,
       is_active: is_active !== undefined ? is_active : true,
     };
 

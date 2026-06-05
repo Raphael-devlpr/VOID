@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { email, password, name, company, phone } = body;
+    const { email, password, name, company, phone, address } = body;
 
     if (!email || !password || !name) {
       return NextResponse.json(
@@ -75,6 +75,7 @@ export async function POST(request: NextRequest) {
         name,
         company: company || null,
         phone: phone || null,
+        address: address || null,
         is_active: true,
       })
       .select()
