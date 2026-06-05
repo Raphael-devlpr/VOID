@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/Button';
 import { Plus, Search, MessageSquare } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProjectsPage() {
   try {
     const session = await requireAuth();

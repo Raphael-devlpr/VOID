@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/Button';
 import { Plus, Users, Mail, Phone, Building2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ClientsPage() {
   try {
     const session = await requireAuth();
