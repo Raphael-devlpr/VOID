@@ -43,8 +43,14 @@ export async function sendEmail({ to, subject, html, text }: EmailOptions) {
 
     console.log('📤 Attempting to send email to:', to);
 
+    // Determine sender email based on SMTP provider
+    const isResend = process.env.SMTP_HOST === 'smtp.resend.com';
+    const fromEmail = isResend 
+      ? 'onboarding@resend.dev' // Resend's default sender (always verified)
+      : (process.env.SMTP_USER || 'info@voidtechsolutions.co.za');
+
     const info = await transporter.sendMail({
-      from: `"VOID Tech Solutions" <${process.env.SMTP_USER || 'info@voidtechsolutions.co.za'}>`,
+      from: `"VOID Tech Solutions" <${fromEmail}>`,
       to,
       subject,
       text: text || html.replace(/<[^>]*>/g, ''), // Strip HTML for text version
