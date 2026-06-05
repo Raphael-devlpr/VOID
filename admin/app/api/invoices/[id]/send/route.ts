@@ -10,6 +10,15 @@ export async function POST(
   try {
     const { id } = await params;
 
+    // Validate SMTP configuration
+    if (!process.env.SMTP_PASSWORD) {
+      console.error('❌ SMTP_PASSWORD not configured');
+      return NextResponse.json(
+        { error: 'Email service not configured. Please contact administrator.' },
+        { status: 500 }
+      );
+    }
+
     // Get invoice details with project info
     const { data: invoice, error: fetchError } = await supabase
       .from('invoices')
@@ -56,8 +65,9 @@ export async function POST(
     );
 
     if (!emailResult.success) {
+      console.error('❌ Email send failed:', emailResult.error);
       return NextResponse.json(
-        { error: 'Failed to send email' },
+        { error: 'Failed to send email', details: emailResult.error },
         { status: 500 }
       );
     }
@@ -80,9 +90,10 @@ export async function POST(
       emailSent: true,
     });
   } catch (error) {
-    console.error('Error in POST /api/invoices/[id]/send:', error);
+    console.error('❌ Error in POST /api/invoices/[id]/send:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to send invoice' },
+      { error: 'Failed to send invoice', details: errorMessage },
       { status: 500 }
     );
   }
