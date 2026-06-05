@@ -1,10 +1,11 @@
 import nodemailer from 'nodemailer';
 
-// Email configuration - uses your cPanel email SMTP
+// Email configuration - uses your cPanel email SMTP or Resend
+const smtpPort = parseInt(process.env.SMTP_PORT || '465');
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'mail.voidtechsolutions.co.za',
-  port: parseInt(process.env.SMTP_PORT || '465'),
-  secure: true, // true for 465, false for other ports
+  port: smtpPort,
+  secure: smtpPort === 465, // true for 465 (direct SSL), false for 587 (STARTTLS)
   auth: {
     user: process.env.SMTP_USER || 'info@voidtechsolutions.co.za',
     pass: process.env.SMTP_PASSWORD || '',
