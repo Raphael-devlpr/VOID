@@ -31,6 +31,7 @@ export default function NewInvoicePage() {
     billing_address: '',
     discount: 0,
     tax: 0,
+    amount_due: '',
   });
 
   // Default invoice items that are pre-populated but can be deleted
@@ -165,6 +166,19 @@ export default function NewInvoicePage() {
       return;
     }
 
+    const parsedAmountDue =
+      formData.amount_due === '' ? total : parseFloat(formData.amount_due);
+
+    if (!Number.isFinite(parsedAmountDue) || parsedAmountDue < 0) {
+      toast.error('Amount due must be a valid number greater than or equal to 0');
+      return;
+    }
+
+    if (parsedAmountDue > total) {
+      toast.error('Amount due cannot be greater than total');
+      return;
+    }
+
     setLoading(true);
     
     try {
@@ -178,6 +192,7 @@ export default function NewInvoicePage() {
         items: validItems,
         discount: formData.discount,
         tax: formData.tax,
+        amount_due: parsedAmountDue,
         invoice_date: formData.invoice_date,
         due_date: formData.due_date || null,
         notes: formData.notes,
@@ -463,6 +478,22 @@ export default function NewInvoicePage() {
                     placeholder="0"
                   />
                 </div>
+
+                <div>
+                  <Label htmlFor="amount_due">Amount Due (R)</Label>
+                  <Input
+                    id="amount_due"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={formData.amount_due}
+                    onChange={(e) => setFormData({ ...formData, amount_due: e.target.value })}
+                    placeholder={total.toFixed(2)}
+                  />
+                  <p className="mt-1 text-xs text-gray-500">
+                    Leave blank to charge full total. Example: 2500 for a 50% deposit on a R 5000 project.
+                  </p>
+                </div>
               </div>
 
               <div className="bg-gray-50 p-4 rounded-md space-y-2">
@@ -485,6 +516,12 @@ export default function NewInvoicePage() {
                 <div className="flex justify-between pt-2 border-t border-gray-300">
                   <span className="text-lg font-semibold">Total:</span>
                   <span className="text-lg font-bold text-blue-600">R {total.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-700 font-medium">Amount Due:</span>
+                  <span className="text-sm font-semibold">
+                    R {(formData.amount_due === '' ? total : Math.max(0, Number(formData.amount_due) || 0)).toFixed(2)}
+                  </span>
                 </div>
               </div>
             </div>

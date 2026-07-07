@@ -2,6 +2,34 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { Invoice } from '@/lib/types';
 
+const MIN_INVOICE_SEQUENCE = 75;
+
+function adjustInvoiceNumber(invoiceNumber: string | number): string {
+  const raw = String(invoiceNumber ?? '').trim();
+  if (!raw) {
+    return raw;
+  }
+
+  const match = raw.match(/(\d+)$/);
+  if (!match) {
+    return raw;
+  }
+
+  const numericPart = match[1];
+  const parsed = Number.parseInt(numericPart, 10);
+  if (Number.isNaN(parsed)) {
+    return raw;
+  }
+
+  // Keep the same prefix/zero-padding, but start visible numbering from 75.
+  const adjusted = parsed < MIN_INVOICE_SEQUENCE
+    ? parsed + (MIN_INVOICE_SEQUENCE - 1)
+    : parsed;
+
+  const padded = adjusted.toString().padStart(numericPart.length, '0');
+  return `${raw.slice(0, -numericPart.length)}${padded}`;
+}
+
 // GET /api/invoices - Get all invoices
 export async function GET(request: NextRequest) {
   try {
@@ -57,6 +85,7 @@ export async function POST(request: NextRequest) {
       items,
       discount = 0,
       tax = 0,
+      amount_due,
       invoice_date,
       due_date,
       notes,
@@ -78,7 +107,27 @@ export async function POST(request: NextRequest) {
       0
     );
     const total = subtotal - discount + tax;
-    const balance_due = total;
+
+    const parsedAmountDue =
+      amount_due === undefined || amount_due === null || amount_due === ''
+        ? total
+        : Number(amount_due);
+
+    if (!Number.isFinite(parsedAmountDue) || parsedAmountDue < 0) {
+      return NextResponse.json(
+        { error: 'Amount due must be a valid number greater than or equal to 0' },
+        { status: 400 }
+      );
+    }
+
+    if (parsedAmountDue > total) {
+      return NextResponse.json(
+        { error: 'Amount due cannot be greater than the invoice total' },
+        { status: 400 }
+      );
+    }
+
+    const balance_due = parsedAmountDue;
 
     // Generate invoice number
     const { data: invoiceNumberData, error: numberError } = await supabase.rpc(
@@ -93,7 +142,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const invoice_number = invoiceNumberData;
+    const invoice_number = adjustInvoiceNumber(invoiceNumberData);
 
     // Prepare items with subtotals
     const itemsWithSubtotals = items.map((item: any) => ({

@@ -137,6 +137,7 @@ export interface InvoiceFormData {
   items: InvoiceItem[];
   discount?: number;
   tax?: number;
+  amount_due?: number;
   invoice_date: string;
   due_date?: string;
   notes?: string;
