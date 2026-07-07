@@ -42,6 +42,7 @@ export async function PUT(
       client_name,
       client_email,
       client_phone,
+      payment_reference,
       items,
       discount,
       tax,
@@ -86,6 +87,9 @@ export async function PUT(
     if (client_name) updateData.client_name = client_name;
     if (client_email) updateData.client_email = client_email;
     if (client_phone !== undefined) updateData.client_phone = client_phone;
+    if (payment_reference !== undefined) {
+      updateData.payment_reference = payment_reference;
+    }
     if (invoice_date) updateData.invoice_date = invoice_date;
     if (due_date !== undefined) updateData.due_date = due_date;
     if (notes !== undefined) updateData.notes = notes;

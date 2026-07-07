@@ -193,6 +193,17 @@ export default function InvoiceDetailPage() {
             </div>
 
             <div className="flex gap-2 flex-wrap">
+              <Link href={`/invoices/${invoice.id}/edit`}>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="hover:bg-gray-50 hover:border-gray-300 transition-all"
+                >
+                  <Edit2 className="mr-2 h-4 w-4" />
+                  Edit Invoice
+                </Button>
+              </Link>
+
               <Button
                 variant="secondary"
                 size="sm"

@@ -103,6 +103,7 @@ export async function POST(request: NextRequest) {
         to: client_email,
         subject: emailTemplate.subject,
         html: emailTemplate.html,
+        text: emailTemplate.text,
       }).catch(err => console.error('Failed to send new project email:', err));
     }
 
