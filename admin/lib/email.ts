@@ -295,12 +295,36 @@ export function newProjectAssignedEmail(
   projectDescription: string,
   portalUrl: string
 ) {
+  const text = `Hi ${clientName},
+
+Great news! We're excited to start working on your new project:
+
+${projectName}
+${projectDescription}
+
+You can now track the progress of your project in real-time through your client portal:
+
+- View project status
+- Access project files
+- See scheduled meetings
+- Add notes and feedback
+
+View Project in Portal: ${portalUrl}
+
+We'll keep you updated at every step. Let's build something amazing together!
+
+VOID Tech Solutions
+info@voidtechsolutions.co.za | www.voidtechsolutions.co.za`;
+
   return {
     subject: `New Project Assigned: ${projectName}`,
+    text,
     html: `
       <!DOCTYPE html>
       <html>
       <head>
+        <meta name="color-scheme" content="light only">
+        <meta name="supported-color-schemes" content="light">
         <style>
           body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
           .container { max-width: 600px; margin: 0 auto; padding: 20px; }
@@ -311,35 +335,35 @@ export function newProjectAssignedEmail(
           .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 14px; }
         </style>
       </head>
-      <body>
-        <div class="container">
+      <body style="margin: 0; padding: 0; background: #ffffff; color: #111827;">
+        <div class="container" style="max-width: 600px; margin: 0 auto; padding: 20px; background: #ffffff; color: #111827;">
           <div class="header">
             <h1>🎉 New Project Started!</h1>
           </div>
-          <div class="content">
-            <p>Hi ${clientName},</p>
+          <div class="content" style="background: #f9fafb; color: #111827;">
+            <p style="color: #111827;">Hi ${clientName},</p>
             
-            <p>Great news! We're excited to start working on your new project:</p>
+            <p style="color: #111827;">Great news! We're excited to start working on your new project:</p>
             
-            <div class="project-box">
+            <div class="project-box" style="background: #ffffff; color: #111827; border: 2px solid #2563eb;">
               <h2 style="margin-top: 0; color: #2563eb;">${projectName}</h2>
-              <p>${projectDescription}</p>
+              <p style="color: #111827;">${projectDescription}</p>
             </div>
             
-            <p>You can now track the progress of your project in real-time through your client portal:</p>
+            <p style="color: #111827;">You can now track the progress of your project in real-time through your client portal:</p>
             
-            <p><strong>✅ View project status</strong><br>
+            <p style="color: #111827;"><strong>✅ View project status</strong><br>
             <strong>📎 Access project files</strong><br>
             <strong>📅 See scheduled meetings</strong><br>
             <strong>💬 Add notes and feedback</strong></p>
             
-            <a href="${portalUrl}" class="button">View Project in Portal</a>
+            <a href="${portalUrl}" class="button" style="display: inline-block; background: #2563eb; color: #ffffff; text-decoration: none;">View Project in Portal</a>
             
-            <p style="margin-top: 30px;">We'll keep you updated at every step. Let's build something amazing together!</p>
+            <p style="margin-top: 30px; color: #111827;">We'll keep you updated at every step. Let's build something amazing together!</p>
           </div>
-          <div class="footer">
-            <p><strong>VOID Tech Solutions</strong></p>
-            <p>info@voidtechsolutions.co.za | www.voidtechsolutions.co.za</p>
+          <div class="footer" style="color: #4b5563;">
+            <p style="color: #4b5563;"><strong>VOID Tech Solutions</strong></p>
+            <p style="color: #4b5563;">info@voidtechsolutions.co.za | www.voidtechsolutions.co.za</p>
           </div>
         </div>
       </body>
