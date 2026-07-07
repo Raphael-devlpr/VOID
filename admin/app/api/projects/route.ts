@@ -97,13 +97,17 @@ export async function POST(request: NextRequest) {
         notes || `We're excited to work on your ${project_type} project!`,
         portalUrl
       );
+      const plainText =
+        'text' in emailTemplate
+          ? (emailTemplate as { text?: string }).text
+          : undefined;
       
       // Send email (non-blocking)
       sendEmail({
         to: client_email,
         subject: emailTemplate.subject,
         html: emailTemplate.html,
-        text: emailTemplate.text,
+        text: plainText,
       }).catch(err => console.error('Failed to send new project email:', err));
     }
 
